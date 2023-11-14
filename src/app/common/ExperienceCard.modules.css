@@ -1,0 +1,14 @@
+#experienceContainer{
+  border-width: 1px;
+  border-color: var(--bs-950);
+}
+#experienceContainer:hover{
+  background-color: var(--bs-900);
+  border-width: 1px;
+  border-color: var(--bs-800);
+  box-shadow: 0 -1px 3px rgba(234, 238, 244, 0.2);
+}
+
+p {
+  font-size: 14px;
+}

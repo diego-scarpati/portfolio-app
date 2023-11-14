@@ -6,13 +6,27 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --bs-50: #f5f7fa;
+  --bs-100: #eaeef4;
+  --bs-200: #cfd9e8;
+  --bs-300: #a5bad4;
+  --bs-400: #7596bb;
+  --bs-500: #5378a4;
+  --bs-600: #405f89;
+  --bs-700: #354d6f;
+  --bs-800: #2f425d;
+  --bs-900: #243042;
+  --bs-950: #1d2634;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* --foreground-rgb: 255, 255, 255; */
+    /* --background-start-rgb: 0, 0, 0; */
+    /* --background-end-rgb: 0, 0, 0; */
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 29, 38, 52;
+    --background-end-rgb: 29, 38, 52;
   }
 }
 
@@ -24,4 +38,18 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--bs-200);
+  /* letter-spacing: -1px; */
+  /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+}
+
+h1 {
+  font-size: 48px;
+}
+h3 {
+  font-size: 36px;
 }
