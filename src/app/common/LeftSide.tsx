@@ -15,9 +15,9 @@ function LeftSide() {
           </p>
         </div>
         <div className=" flex flex-col mt-14 gap-2">
-          <Section title="ABOUT" scrollToPosition={0}/>
-          <Section title="EXPERIENCE" scrollToPosition={400}/>
-          <Section title="SIDE PROJECTS" scrollToPosition={800}/>
+          <Section title="ABOUT" top={0} bottom={400}/>
+          <Section title="EXPERIENCE" top={400} bottom={800}/>
+          <Section title="SIDE PROJECTS" top={800} bottom={9999}/>
         </div>
         <Contact />
       </nav>

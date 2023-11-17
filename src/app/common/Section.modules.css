@@ -2,20 +2,28 @@
   transition: background-color 0.3s;
 } */
 
-#sectionBlock {
+.sectionBlock {
   background-color: var(--bs-400);
 }
-#sectionTitle {
+.sectionTitle {
   color: var(--bs-400);
 }
-#sectionBlock {
+.sectionBlock {
   transition: width 0.5s;
 }
 
-#sectionContainer:hover #sectionBlock{
+#sectionContainer:hover .sectionBlock{
   background-color: var(--bs-600);
   width: 100px;
 }
-#sectionContainer:hover #sectionTitle{
+#sectionContainer:hover .sectionTitle{
+  color: var(--bs-600);
+}
+
+.activeBlock{
+  background-color: var(--bs-600);
+  width: 100px;
+}
+.activeTitle{
   color: var(--bs-600);
 }

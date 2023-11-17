@@ -1,37 +1,55 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../globals.css";
-import "./Section.modules.css"
+import "./Section.modules.css";
 
 interface SectionProps {
   title: string;
-  scrollToPosition: number;
+  top: number;
+  bottom: number;
 }
 
-function Section({ title, scrollToPosition }: SectionProps) {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const handleHoverColor = () => {
-    setHovered(!hovered);
-  };
-
-  // const scrollToPosition = 
+function Section({ title, top, bottom }: SectionProps) {
+  const [active, setActive] = useState<boolean>(false);
 
   const handleScroll = () => {
-    window.scrollTo({top: scrollToPosition, behavior: "smooth"})
-  }
+    window.scrollTo({ top: top, behavior: "smooth" });
+  };
+
+  const handleVerticalScroll = () => {
+    if (window.scrollY >= top && window.scrollY < bottom) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleVerticalScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleVerticalScroll);
+    };
+  }, []);
 
   return (
     <div
       id="sectionContainer"
-      className="flex p-2 items-center"
-      onMouseEnter={handleHoverColor}
-      onMouseLeave={handleHoverColor}
-      // onClick={()=> handleScroll(800)}
+      className={"flex p-2 items-center"}
       onClick={handleScroll}
     >
-      <div className="w-16 h-1 " id="sectionBlock" />
-      <p className="ml-4" id="sectionTitle">
+      <div
+        className={
+          active ? "sectionBlock w-16 h-1 activeBlock" : "sectionBlock w-16 h-1"
+        }
+        id="sectionBlock"
+      />
+      <p
+        className={
+          active ? "sectionTitle ml-4 activeTitle" : "sectionTitle ml-4"
+        }
+      >
         {title}
       </p>
     </div>
