@@ -1,6 +1,7 @@
 /* #name{} */
 /* #role{} */
-#about{
+#about {
   width: auto;
   max-width: 470px;
+  font-size: 16px;
 }

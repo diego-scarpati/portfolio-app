@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "employer": "Flock IT",
+      "start": "NOV 2022",
+      "end": "SEP 2023",
+      "title": "R&D Analyst",
+      "brief": "React Native leader for a MVP regarding Health and Digital Identity",
+      "technologies": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "React Native",
+        "Redux",
+        "Expo",
+        "AWS"
+      ],
+      "url": "https://www.lifeid.ar/"
+    }
+  ]
+}

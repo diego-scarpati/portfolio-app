@@ -1,11 +1,11 @@
-#experienceContainer{
+#experienceContainer {
   border-width: 1px;
-  border-color: var(--bs-950);
+  border-color: var(--bs-900);
 }
-#experienceContainer:hover{
-  background-color: var(--bs-900);
+#experienceContainer:hover {
+  background-color: var(--bs-800);
   border-width: 1px;
-  border-color: var(--bs-800);
+  border-color: var(--bs-700);
   box-shadow: 0 -1px 3px rgba(234, 238, 244, 0.2);
 }
 

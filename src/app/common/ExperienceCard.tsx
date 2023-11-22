@@ -1,6 +1,7 @@
 import React from "react";
 import ExperienceInfo from "./ExperienceInfo";
 import "./ExperienceCard.modules.css";
+import Link from "next/link";
 
 interface ExpCardProps {
   employer?: string;
@@ -14,9 +15,11 @@ interface ExpCardProps {
 
 function ExperienceCard({ ...props }: ExpCardProps) {
   return (
-    <div
+    <Link
       className="flex justify-between p-5 my-2 gap-12 rounded-2xl"
       id="experienceContainer"
+      href={props.url}
+      target="_blank"
     >
       {props.employer ? (
         <>
@@ -28,7 +31,7 @@ function ExperienceCard({ ...props }: ExpCardProps) {
       ) : (
         <ExperienceInfo {...props} />
       )}
-    </div>
+    </Link>
   );
 }
 

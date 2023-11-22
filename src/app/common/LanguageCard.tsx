@@ -12,7 +12,7 @@ function LanguageCard({ language }: LanguageCardProps) {
           color: "var(--bs-300)",
           fontStyle: "normal",
           fontWeight: 400,
-          fontSize: "12px"
+          fontSize: "12px",
         }}
         className="flex items-center justify-center"
       >
