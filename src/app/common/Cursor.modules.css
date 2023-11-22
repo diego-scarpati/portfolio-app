@@ -7,6 +7,5 @@
     transform 0s,
     filter 0s;
   border-radius: 100%;
-  /* box-shadow: 0 0 250px 250px #2e415c80; */
   box-shadow: 0 0 100px 250px rgba(234, 238, 244, 0.025);
 }

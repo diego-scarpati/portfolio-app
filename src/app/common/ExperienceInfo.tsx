@@ -8,11 +8,16 @@ interface ExpInfoProps {
   technologies: string[];
 }
 
-function ExperienceInfo({ employer, title, brief, technologies }: ExpInfoProps) {
+function ExperienceInfo({
+  employer,
+  title,
+  brief,
+  technologies,
+}: ExpInfoProps) {
   return (
     <div
       className="flex flex-col gap-4 justify-between"
-      style={{ maxWidth: employer ? 310 : "100%"}}
+      style={{ maxWidth: employer ? 310 : "100%" }}
     >
       <div id="expTitle">
         {employer && <p>{employer}</p>}

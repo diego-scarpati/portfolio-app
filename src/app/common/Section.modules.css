@@ -12,18 +12,18 @@
   transition: width 0.5s;
 }
 
-#sectionContainer:hover .sectionBlock{
+#sectionContainer:hover .sectionBlock {
   background-color: var(--bs-600);
   width: 100px;
 }
-#sectionContainer:hover .sectionTitle{
+#sectionContainer:hover .sectionTitle {
   color: var(--bs-600);
 }
 
-.activeBlock{
+.activeBlock {
   background-color: var(--bs-600);
   width: 100px;
 }
-.activeTitle{
+.activeTitle {
   color: var(--bs-600);
 }

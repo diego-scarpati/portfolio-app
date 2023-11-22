@@ -5,8 +5,8 @@ import * as workJson from "../assets/info/work.json";
 import * as projectsJson from "../assets/info/projects.json";
 
 function RightSide() {
-  const work = workJson
-  const projects = projectsJson
+  const work = workJson;
+  const projects = projectsJson;
 
   return (
     <div className="w-1/2 h-full pt-24 px-16 gap-4">
