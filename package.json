@@ -9,6 +9,9 @@
     "lint": "next lint",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write"
+  },
   "dependencies": {
     "next": "13.5.5",
     "react": "^18",
