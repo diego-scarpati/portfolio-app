@@ -1,6 +1,6 @@
 "use client";
 import React, { HTMLAttributes, useState } from "react";
-import "../../globals.css"
+import "../../globals.css";
 
 interface SVGProps extends HTMLAttributes<any> {
   size: string;

@@ -1,16 +1,16 @@
-"use client"
+"use client";
 import React, { HTMLAttributes, useState } from "react";
 
 interface SVGProps extends HTMLAttributes<any> {
   size: string;
-  className: string | undefined
+  className: string | undefined;
 }
 
 function EmailIcon({ size, className }: SVGProps) {
-  const [hovered, setHovered] = useState<boolean>(false)
+  const [hovered, setHovered] = useState<boolean>(false);
   const handleHoverColor = () => {
-    setHovered(!hovered)
-  }
+    setHovered(!hovered);
+  };
 
   return (
     <div onMouseEnter={handleHoverColor} onMouseLeave={handleHoverColor}>
