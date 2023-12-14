@@ -1,29 +1,78 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Contact from "./Contact";
 import Section from "./Section";
-import "./LeftSide.modules.css";
+import { RootState } from "../../lib/store";
+import { SectionEnum, setSection } from "@/lib/features/section";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 function LeftSide() {
+  const section = useAppSelector((state: RootState) => state.section);
+  const dispatch = useAppDispatch();
+  const sections = [
+    {
+      title: SectionEnum.ABOUT,
+      top: 0,
+      bottom: section.experience,
+    },
+    {
+      title: SectionEnum.EXPERIENCE,
+      top: section.experience,
+      bottom: section.projects,
+    },
+    {
+      title: SectionEnum["SIDE PROJECTS"],
+      top: section.projects,
+      bottom: 9999,
+    },
+  ];
+
+  useEffect(() => {
+    const isActive = () => {
+      if (window.scrollY < section.experience) {
+        dispatch(setSection(SectionEnum.ABOUT));
+      }
+      if (
+        window.scrollY >= section.experience &&
+        window.scrollY < section.projects
+      ) {
+        dispatch(setSection(SectionEnum.EXPERIENCE));
+      }
+      if (window.scrollY >= section.projects) {
+        dispatch(setSection(SectionEnum["SIDE PROJECTS"]));
+      }
+    };
+    window.addEventListener("scroll", isActive);
+
+    return () => {
+      window.removeEventListener("scroll", isActive);
+    };
+  }, [section]);
+
   return (
     <nav className="h-full">
       <div className="flex flex-col gap-4">
-        <h1 id="name" className="">
+        <h1 id="name" className="md:text-2xl lg:text-5xl">
           Diego Scarpati
         </h1>
-        <h3 id="role" className="">
+        <h3 id="role" className="md:text-lg lg:text-4xl">
           FullStack Web3 Developer
         </h3>
-        <p id="about" className="">
-          Argentinean dev, lateral thinker, dad joke's crafter but above all,
+        <p id="about" className="md:text-sm lg:text-base w-auto max-w-md">
+          Argentinean dev, lateral thinker, dad joke's crafter but above all, a
           great human.
         </p>
       </div>
       <div className="flex flex-col mt-14 gap-2">
-        <Section title="ABOUT" top={0} bottom={300} />
-        <Section title="EXPERIENCE" top={300} bottom={425} />
-        <Section title="SIDE PROJECTS" top={425} bottom={9999} />
+        {sections.map((section, index) => (
+          <Section
+            title={section.title}
+            top={section.top}
+            bottom={section.bottom}
+            key={index}
+          />
+        ))}
       </div>
       <Contact />
     </nav>

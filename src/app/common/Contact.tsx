@@ -8,21 +8,21 @@ import CvIcon from "../assets/icons/CvIcon";
 
 function Contact() {
   return (
-    <div className="flex mt-24">
+    <div className="flex md:mt-16 lg:mt-24">
       <Link href="https://www.linkedin.com/in/diego-scarpati/" target="_blank">
-        <LinkedInIcon size="32" className="m-4 rounded-md" />
+        <LinkedInIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
       <Link href="https://github.com/diego-scarpati" target="_blank">
-        <GitHubIcon size="32" className="m-4 rounded-md" />
+        <GitHubIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
       <Link href="mailto:diegoscarpati13gmail.com" target="_blank">
-        <EmailIcon size="32" className="m-4 rounded-md" />
+        <EmailIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
       <Link href="https://wa.me/+61499404825" target="_blank">
-        <WhatsappIcon size="32" className="m-4 rounded-md" />
+        <WhatsappIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
       <Link href="Diego-Scarpati.pdf" download="Diego-Scarpati" target="_blank">
-        <CvIcon size="32" className="m-4 rounded-md" />
+        <CvIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
     </div>
   );

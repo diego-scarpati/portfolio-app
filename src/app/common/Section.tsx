@@ -1,54 +1,46 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import "../globals.css";
-import "./Section.modules.css";
+import { SectionEnum } from "@/lib/features/section";
+import { useAppSelector } from "@/lib/hooks";
+import { RootState } from "@/lib/store";
+import React from "react";
 
-interface SectionProps {
-  title: string;
+type SectionProps = {
+  title: SectionEnum;
   top: number;
   bottom: number;
-}
+};
 
 function Section({ title, top, bottom }: SectionProps) {
-  const [active, setActive] = useState<boolean>(false);
+  const section = useAppSelector((state: RootState) => state.section);
+  // const [active, setActive] = useState<boolean>(false);
 
+  const inactiveDiv =
+    "w-16 h-1 bg-big-stone-400 group-hover:bg-big-stone-600 transition-width duration-500 group-hover:w-24";
+  const activeDiv = "h-1 bg-big-stone-600 transition-width duration-500 w-24";
   const handleScroll = () => {
-    window.scrollTo({ top: top, behavior: "smooth" });
+    window.scrollTo({
+      top: top,
+      behavior: "smooth",
+    });
   };
-
-  const handleVerticalScroll = () => {
-    if (window.scrollY >= top && window.scrollY < bottom) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleVerticalScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleVerticalScroll);
-    };
-  }, []);
 
   return (
     <div
       id="sectionContainer"
-      className={"flex p-2 items-center"}
+      className={"flex p-2 items-center group"}
       onClick={handleScroll}
     >
       <div
-        className={
-          active ? "sectionBlock w-16 h-1 activeBlock" : "sectionBlock w-16 h-1"
-        }
+        className={section.section === title ? activeDiv : inactiveDiv}
         id="sectionBlock"
       />
       <p
-        className={
-          active ? "sectionTitle ml-4 activeTitle" : "sectionTitle ml-4"
-        }
+        className={`ml-4 group-hover:text-big-stone-600 text-sm ${
+          section.section === title
+            ? "text-big-stone-600"
+            : "text-big-stone-400"
+        }`}
       >
         {title}
       </p>

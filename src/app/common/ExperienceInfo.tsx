@@ -20,11 +20,11 @@ function ExperienceInfo({
       style={{ maxWidth: employer ? 310 : "100%" }}
     >
       <div id="expTitle">
-        {employer && <p>{employer}</p>}
-        <p>{title}</p>
+        {employer && <p className="text-xl">{employer}</p>}
+        <p className="text-xl">{title}</p>
       </div>
       <div id="expBrief">
-        <p>{brief}</p>
+        <p className="text-sm">{brief}</p>
       </div>
       <div id="languages" className="flex flex-wrap justify-start gap-2">
         {technologies.map((language, index) => (

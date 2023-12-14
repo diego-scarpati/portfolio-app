@@ -3,14 +3,20 @@
     {
       "title": "The Movie DataBase",
       "brief": "Looking to watch a movie or tv series and don't know in which platform to stream it? This app is for you. My first React project. It's a Front-End connected to an API that, regarding your IP location will serve you where to watch it.",
-      "technologies": ["JavaScript", "React", "Redux"],
+      "technologies": ["JavaScript", "React", "Redux", "Chakra UI"],
       "url": "https://tmdb-scarpati.vercel.app/"
     },
     {
       "title": "Crypto Prode",
-      "brief": "The prode is kind of a fantasy football game, very popular in Argentina. Solution developed in Solidity, contract never left GitHub",
+      "brief": "The prode is kind of a fantasy football game, very popular in Argentina. The Crypto Prode was intended as a game to be played during the FIFA World Cup hosted in Qatar. Solution developed in Solidity, contract never left GitHub.",
       "technologies": ["JavaScript", "React", "Next.js", "Solidity"],
       "url": "https://github.com/diego-scarpati/crypto-prode"
+    },
+    {
+      "title": "Portfolio App",
+      "brief": "By clicking here you'll have access to the Github repository to the code of this portfolio.",
+      "technologies": ["TypeScript", "React", "Next.js", "Redux", "Tailwind"],
+      "url": "https://github.com/diego-scarpati/portfolio-app"
     }
   ]
 }
