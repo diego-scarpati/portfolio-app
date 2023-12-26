@@ -53,18 +53,21 @@ function LeftSide() {
   return (
     <nav className="h-full">
       <div className="flex flex-col gap-4">
-        <h1 id="name" className="md:text-2xl lg:text-5xl">
+        <h1 id="name">
+          {/* <h1 id="name" className="md:text-2xl lg:text-5xl"> */}
           Diego Scarpati
         </h1>
-        <h3 id="role" className="md:text-lg lg:text-4xl">
+        <h3 id="role">
+          {/* <h3 id="role" className="md:text-lg lg:text-4xl"> */}
           FullStack Web3 Developer
         </h3>
-        <p id="about" className="md:text-sm lg:text-base w-auto max-w-md">
+        <p id="about">
+          {/* <p id="about" className="md:text-sm lg:text-base w-auto max-w-md"> */}
           Argentinean dev, lateral thinker, dad joke's crafter but above all, a
           great human.
         </p>
       </div>
-      <div className="flex flex-col mt-14 gap-2">
+      <div className="lg:flex flex-col mt-14 gap-2 hidden">
         {sections.map((section, index) => (
           <Section
             title={section.title}
@@ -74,7 +77,9 @@ function LeftSide() {
           />
         ))}
       </div>
-      <Contact />
+      <div className="hidden lg:flex">
+        <Contact />
+      </div>
     </nav>
   );
 }

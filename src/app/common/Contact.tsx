@@ -8,7 +8,8 @@ import CvIcon from "../assets/icons/CvIcon";
 
 function Contact() {
   return (
-    <div className="flex md:mt-16 lg:mt-24">
+    <div className="flex mt-12 w-1/2 lg:w-auto">
+      {/* <div className="flex md:mt-16 lg:mt-24"> */}
       <Link href="https://www.linkedin.com/in/diego-scarpati/" target="_blank">
         <LinkedInIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
