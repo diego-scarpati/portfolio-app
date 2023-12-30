@@ -1,4 +1,5 @@
 import StoreProvider from "./StoreProvider";
+import BackToTopButton from "./common/BackToTopButton";
 import Contact from "./common/Contact";
 import LeftSide from "./common/LeftSide";
 import RightSide from "./common/RightSide";
@@ -15,6 +16,7 @@ export default function Home() {
         <div className="lg:hidden flex justify-center pb-12">
           <Contact />
         </div>
+        <BackToTopButton />
       </main>
     </StoreProvider>
   );

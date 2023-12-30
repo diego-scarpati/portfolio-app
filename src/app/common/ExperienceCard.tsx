@@ -23,8 +23,8 @@ function ExperienceCard({ ...props }: ExpCardProps) {
       {props.employer ? (
         <>
           <div id="experienceDate">
-            <p className="text-sm md:text-xs sm:text-xs">
-              {props.start + " " + props.end}
+            <p className="text-xs lg:text-base">
+              {props.start + " - " + props.end}
             </p>
           </div>
           <ExperienceInfo {...props} />
