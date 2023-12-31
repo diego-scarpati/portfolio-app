@@ -27,9 +27,11 @@ function RightSideTitle({ title }: RightSideTitleProps) {
     window.addEventListener("load", handleComponentPosition);
     // Attach a resize event listener to update the position if the window is resized
     window.addEventListener("resize", handleComponentPosition);
+    window.addEventListener("orientationchange", handleComponentPosition);
 
     return () => {
       window.removeEventListener("resize", handleComponentPosition);
+      window.removeEventListener("orientationchange", handleComponentPosition);
       window.removeEventListener("load", handleComponentPosition);
     };
   }, []);
