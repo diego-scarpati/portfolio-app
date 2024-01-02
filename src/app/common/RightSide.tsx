@@ -15,14 +15,14 @@ function RightSide() {
       <Bio />
       <div className="mt-16">
         <RightSideTitle title={"Professional Experience"} />
-        {work.data.map((exp, index) => (
-          <ExperienceCard key={index} {...exp} />
+        {work.data.map((exp) => (
+          <ExperienceCard key={exp.title} {...exp} />
         ))}
       </div>
       <div className="my-16">
         <RightSideTitle title={"Side Projects"} />
-        {projects.data.map((exp, index) => (
-          <ExperienceCard key={index} {...exp} />
+        {projects.data.map((project) => (
+          <ExperienceCard key={project.title} {...project} />
         ))}
       </div>
     </div>

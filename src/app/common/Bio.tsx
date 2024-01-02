@@ -18,8 +18,8 @@ function Bio() {
         aims to solve.
       </p>
       <p className="sm:text-sm mb-4">
-        What you’ll get a dev that loves to work in a diverse team, but can also
-        do solo tasks. A former captain of a soccer team with friends on
+        What you’ll get is a dev that loves to work in a diverse team, but can
+        also do solo tasks. A former captain of a soccer team with friends on
         weekends, tennis player during weekdays, but also someone who will
         transmit positive energy and a smile everyday.
       </p>
