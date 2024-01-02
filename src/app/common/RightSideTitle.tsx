@@ -37,9 +37,9 @@ function RightSideTitle({ title }: RightSideTitleProps) {
   }, []);
 
   return (
-    <h4 className="my-10 md:text-xl sm:text-base" ref={titleRef}>
+    <h3 className="my-10 md:text-xl sm:text-base" ref={titleRef}>
       {title}
-    </h4>
+    </h3>
   );
 }
 

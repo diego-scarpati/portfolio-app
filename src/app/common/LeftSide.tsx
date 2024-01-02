@@ -59,12 +59,12 @@ function LeftSide() {
         >
           Diego Scarpati
         </h1>
-        <h3
+        <h2
           id="role"
           className=" sm:text-base md:text-lg lg:text-2xl text-sm font-semibold"
         >
           FullStack Web3 Developer
-        </h3>
+        </h2>
         <p id="about" className="md:text-base md:max-w-lg lg:max-w-md ">
           Argentinean dev, lateral thinker, dad joke's crafter but above all, a
           great human.

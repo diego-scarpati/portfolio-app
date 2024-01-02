@@ -13,7 +13,6 @@ type SectionProps = {
 
 function Section({ title, top, bottom }: SectionProps) {
   const section = useAppSelector((state: RootState) => state.section);
-  // const [active, setActive] = useState<boolean>(false);
 
   const inactiveDiv =
     "w-16 h-1 bg-big-stone-400 group-hover:bg-big-stone-600 transition-width duration-500 group-hover:w-24";
@@ -36,7 +35,7 @@ function Section({ title, top, bottom }: SectionProps) {
         id="sectionBlock"
       />
       <p
-        className={`ml-4 group-hover:text-big-stone-600 sm:text-sm ${
+        className={`ml-4 group-hover:text-big-stone-600 sm:text-sm font-semibold ${
           section.section === title
             ? "text-big-stone-600"
             : "text-big-stone-400"
