@@ -2,7 +2,7 @@ import React from "react";
 import ExperienceInfo from "./ExperienceInfo";
 import Link from "next/link";
 
-interface ExpCardProps {
+export interface ExpCardProps {
   employer?: string;
   start?: string;
   end?: string;
@@ -20,7 +20,7 @@ function ExperienceCard({ ...props }: ExpCardProps) {
       href={props.url}
       target="_blank"
     >
-      {props.employer ? (
+      {/* {props.employer ? (
         <>
           <div id="experienceDate">
             <p className="text-xs lg:text-base">
@@ -31,7 +31,8 @@ function ExperienceCard({ ...props }: ExpCardProps) {
         </>
       ) : (
         <ExperienceInfo {...props} />
-      )}
+      )} */}
+      <ExperienceInfo {...props} />
     </Link>
   );
 }
