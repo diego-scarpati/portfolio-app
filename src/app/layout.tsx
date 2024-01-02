@@ -12,6 +12,8 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Diego Scarpati",
   description: "A Web3 FullStack Developer",
+  keywords:
+    "Web3, Full Stack Developer, ReactJs, React Native, Blockchain, Ethereum, Solidity, Dapp Development",
 };
 
 export default function RootLayout({
