@@ -20,18 +20,6 @@ function ExperienceCard({ ...props }: ExpCardProps) {
       href={props.url}
       target="_blank"
     >
-      {/* {props.employer ? (
-        <>
-          <div id="experienceDate">
-            <p className="text-xs lg:text-base">
-              {props.start + " - " + props.end}
-            </p>
-          </div>
-          <ExperienceInfo {...props} />
-        </>
-      ) : (
-        <ExperienceInfo {...props} />
-      )} */}
       <ExperienceInfo {...props} />
     </Link>
   );

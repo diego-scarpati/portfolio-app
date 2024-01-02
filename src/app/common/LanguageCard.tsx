@@ -14,7 +14,7 @@ function LanguageCard({ language }: LanguageCardProps) {
           fontWeight: 400,
           fontSize: "12px",
         }}
-        className="flex items-center justify-center"
+        className="flex items-center justify-center sm:text-sm"
       >
         {language}
       </p>

@@ -24,14 +24,11 @@ function ExperienceInfo({
           <>
             <div className="flex flex-row justify-between pr-8">
               <div id="employer">
-                <p className="text-xs lg:text-xl font-semibold">{employer}</p>
-                <p className="text-xs lg:text-base font-semibold">{title}</p>
+                <p className="lg:text-xl font-semibold">{employer}</p>
+                <p className="lg:text-base font-semibold">{title}</p>
               </div>
-              <div
-                id="experienceDate"
-                // className=" bg-big-stone-50 flex items-center"
-              >
-                <p className="text-xs pt-1">{start + " - " + end}</p>
+              <div id="experienceDate">
+                <p className="pt-1">{start + " - " + end}</p>
               </div>
             </div>
           </>

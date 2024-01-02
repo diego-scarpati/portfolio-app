@@ -36,7 +36,7 @@ function Section({ title, top, bottom }: SectionProps) {
         id="sectionBlock"
       />
       <p
-        className={`ml-4 group-hover:text-big-stone-600 text-sm ${
+        className={`ml-4 group-hover:text-big-stone-600 sm:text-sm ${
           section.section === title
             ? "text-big-stone-600"
             : "text-big-stone-400"

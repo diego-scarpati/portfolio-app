@@ -53,9 +53,19 @@ function LeftSide() {
   return (
     <nav className="h-full">
       <div className="flex flex-col gap-4">
-        <h1 id="name">Diego Scarpati</h1>
-        <h3 id="role">FullStack Web3 Developer</h3>
-        <p id="about">
+        <h1
+          id="name"
+          className=" sm:text-lg md:text-2xl lg:text-4xl text-base font-semibold"
+        >
+          Diego Scarpati
+        </h1>
+        <h3
+          id="role"
+          className=" sm:text-base md:text-lg lg:text-2xl text-sm font-semibold"
+        >
+          FullStack Web3 Developer
+        </h3>
+        <p id="about" className="md:text-base md:max-w-lg lg:max-w-md ">
           Argentinean dev, lateral thinker, dad joke's crafter but above all, a
           great human.
         </p>
