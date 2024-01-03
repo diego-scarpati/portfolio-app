@@ -55,13 +55,13 @@ function LeftSide() {
       <div className="flex flex-col gap-4">
         <h1
           id="name"
-          className=" sm:text-lg md:text-2xl lg:text-4xl text-base font-semibold"
+          className="sm:text-lg md:text-2xl lg:text-4xl text-base font-semibold"
         >
           Diego Scarpati
         </h1>
         <h2
           id="role"
-          className=" sm:text-base md:text-lg lg:text-2xl text-sm font-semibold"
+          className="sm:text-base md:text-lg lg:text-2xl text-sm font-semibold"
         >
           FullStack Web3 Developer
         </h2>

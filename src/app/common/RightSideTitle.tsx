@@ -37,7 +37,11 @@ function RightSideTitle({ title }: RightSideTitleProps) {
   }, []);
 
   return (
-    <h3 className="my-10 md:text-xl sm:text-base" ref={titleRef}>
+    // className="sm:text-base md:text-lg lg:text-2xl text-sm font-semibold"
+    <h3
+      className="my-10 sm:text-base md:text-base lg:text-xl font-semibold"
+      ref={titleRef}
+    >
       {title}
     </h3>
   );

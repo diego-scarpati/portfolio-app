@@ -17,7 +17,7 @@ function ExperienceInfo({
           <>
             <div className="flex flex-row justify-between pr-8">
               <div id="employer">
-                <p className="lg:text-xl font-semibold">{employer}</p>
+                <p className="lg:text-lg font-semibold">{employer}</p>
                 <p className="lg:text-base font-semibold">{title}</p>
               </div>
               <div id="experienceDate">
@@ -26,7 +26,7 @@ function ExperienceInfo({
             </div>
           </>
         ) : (
-          <p className="text-xs lg:text-lg font-semibold">{title}</p>
+          <p className="text-xs lg:text-base font-semibold">{title}</p>
         )}
       </div>
       <div id="expBrief">
