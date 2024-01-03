@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255; */
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 36, 48, 66;
+  --background-end-rgb: 36, 48, 66;
   --bs-50: #f5f7fa;
   --bs-100: #eaeef4;
   --bs-200: #cfd9e8;
@@ -19,16 +22,13 @@
   --bs-950: #1d2634;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    /* --foreground-rgb: 255, 255, 255; */
-    /* --background-start-rgb: 0, 0, 0; */
-    /* --background-end-rgb: 0, 0, 0; */
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 36, 48, 66;
     --background-end-rgb: 36, 48, 66;
   }
-}
+} */
 
 body {
   background: linear-gradient(
