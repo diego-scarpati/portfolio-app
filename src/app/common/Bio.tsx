@@ -3,7 +3,6 @@ import React from "react";
 function Bio() {
   return (
     <div className="w-full">
-      {/* <p className="mb-4 md:text-sm sm:text-sm"> */}
       <p className="sm:text-sm mb-4">
         Former senior accountant at EY who always was intrigued by programming.
         For me, the Covid lockdown was the kickstarter in the wonderful of

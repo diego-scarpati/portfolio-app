@@ -23,7 +23,7 @@ function BackToTopButton() {
 
   return (
     <div
-      className={`fixed bottom-4 right-2 md:right-4 w-12 h-12 flex justify-center items-center rounded-full bg-big-stone-400 transition duration-300 lg:hidden ${
+      className={`fixed bottom-4 right-3 md:right-4 w-12 h-12 flex justify-center items-center rounded-full bg-big-stone-400 transition duration-300 lg:hidden ${
         active ? "scale-100" : "scale-0"
       }`}
       onClick={() =>

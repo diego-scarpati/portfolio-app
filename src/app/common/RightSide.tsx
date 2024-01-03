@@ -11,7 +11,7 @@ function RightSide() {
   const projects = projectsJson;
 
   return (
-    <div className="w-full lg:w-1/2 h-full pt-24 px-16 gap-4">
+    <div className="w-full lg:w-1/2 h-full pt-12 md:pt-16 lg:pt-24 px-12 md:px-16 gap-4">
       <Bio />
       <div className="mt-16">
         <RightSideTitle title={"Professional Experience"} />

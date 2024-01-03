@@ -2,13 +2,6 @@ import React from "react";
 import LanguageCard from "./LanguageCard";
 import { ExpCardProps } from "./ExperienceCard";
 
-// interface ExpInfoProps {
-//   employer?: string;
-//   title: string;
-//   brief: string;
-//   technologies: string[];
-// }
-
 function ExperienceInfo({
   employer,
   title,
@@ -37,9 +30,9 @@ function ExperienceInfo({
         )}
       </div>
       <div id="expBrief">
-        <p className="text-sm">{brief}</p>
+        <p className="text-xs sm:text-sm">{brief}</p>
       </div>
-      <div id="languages" className="flex flex-wrap justify-start gap-2">
+      <div id="languages" className="flex flex-wrap sm:justify-start gap-2">
         {technologies.map((language, index) => (
           <LanguageCard key={index} language={language} />
         ))}
