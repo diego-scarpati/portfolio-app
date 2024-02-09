@@ -1,6 +1,11 @@
 import React from "react";
 import LanguageCard from "./LanguageCard";
 import { ExpCardProps } from "./ExperienceCard";
+import ArrowLink from "../assets/icons/ArrowLink";
+
+interface ExpCardPropsHovered extends ExpCardProps {
+  hovered: boolean;
+}
 
 function ExperienceInfo({
   employer,
@@ -9,7 +14,8 @@ function ExperienceInfo({
   technologies,
   start,
   end,
-}: ExpCardProps) {
+  hovered,
+}: ExpCardPropsHovered) {
   return (
     <div className="flex flex-col gap-4 justify-between w-full">
       <div id="expTitle" className="w-full">
@@ -20,8 +26,9 @@ function ExperienceInfo({
                 <p className="lg:text-lg font-semibold">{employer}</p>
                 <p className="lg:text-base font-semibold">{title}</p>
               </div>
-              <div id="experienceDate">
+              <div id="experienceDate" className="flex justify-between w-40">
                 <p className="pt-1">{start + " - " + end}</p>
+                <ArrowLink size="20" className="" hovered={hovered} />
               </div>
             </div>
           </>
