@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { setExperience, setProjects } from "../../lib/features/section";
+import {
+  setExperience,
+  setProjects,
+  setWidth,
+} from "../../lib/features/section";
 import { useAppDispatch } from "@/lib/hooks";
 
 type RightSideTitleProps = {
@@ -15,6 +19,7 @@ function RightSideTitle({ title }: RightSideTitleProps) {
   const handleComponentPosition = () => {
     if (titleRef.current) {
       const rect = titleRef.current.getBoundingClientRect();
+      dispatch(setWidth(window.innerWidth));
       title === "Professional Experience"
         ? dispatch(setExperience(rect.top + window.scrollY - 50))
         : dispatch(setProjects(rect.top + window.scrollY - 50));

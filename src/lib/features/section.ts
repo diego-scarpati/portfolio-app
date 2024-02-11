@@ -10,12 +10,14 @@ type initialStateType = {
   experience: number;
   projects: number;
   section: SectionEnum;
+  windowWidth: number;
 };
 
 const initialState: initialStateType = {
   experience: 0,
   projects: 0,
   section: SectionEnum.ABOUT,
+  windowWidth: 0,
 };
 
 const sectionSlice = createSlice({
@@ -31,9 +33,13 @@ const sectionSlice = createSlice({
     setSection: (state, action: PayloadAction<SectionEnum>) => {
       state.section = action.payload;
     },
+    setWidth: (state, action: PayloadAction<number>) => {
+      state.windowWidth = action.payload;
+    },
   },
 });
 
 export default sectionSlice.reducer;
 
-export const { setExperience, setProjects, setSection } = sectionSlice.actions;
+export const { setExperience, setProjects, setSection, setWidth } =
+  sectionSlice.actions;

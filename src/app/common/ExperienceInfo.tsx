@@ -21,19 +21,23 @@ function ExperienceInfo({
       <div id="expTitle" className="w-full">
         {employer ? (
           <>
-            <div className="flex flex-row justify-between pr-8">
+            {/* <div className="flex flex-row justify-between pr-8"> */}
+            <div className="flex flex-row justify-between">
               <div id="employer">
                 <p className="lg:text-lg font-semibold">{employer}</p>
                 <p className="lg:text-base font-semibold">{title}</p>
               </div>
               <div id="experienceDate" className="flex justify-between w-40">
                 <p className="pt-1">{start + " - " + end}</p>
-                <ArrowLink size="20" className="" hovered={hovered} />
+                <ArrowLink size="16" className="pt-1" hovered={hovered} />
               </div>
             </div>
           </>
         ) : (
-          <p className="text-xs lg:text-base font-semibold">{title}</p>
+          <div className="flex w-full justify-between">
+            <p className="text-xs lg:text-base font-semibold">{title}</p>
+            <ArrowLink size="16" className="pt-1" hovered={hovered} />
+          </div>
         )}
       </div>
       <div id="expBrief">
