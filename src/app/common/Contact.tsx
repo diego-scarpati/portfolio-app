@@ -38,7 +38,8 @@ function Contact() {
         <WhatsappIcon size="32" className="md:m-3 lg:m-4 rounded-md" />
       </Link>
       <Link
-        href="Diego-Scarpati.pdf"
+        // href="Diego-Scarpati.pdf"
+        href="diego-scarpati-au.pdf"
         download="Diego-Scarpati"
         target="_blank"
         title="Diego Scarpati's CV download link"
