@@ -16,6 +16,21 @@
         "AWS"
       ],
       "url": "https://www.lifeid.ar/"
+    },
+    {
+      "employer": "Ada Souls",
+      "start": "MAR 2024",
+      "end": "NOW",
+      "title": "Web3 Fullstack Developer",
+      "brief": "Working with Solidity, React, Node.js, and other technologies to build a decentralized application",
+      "technologies": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Solidity"
+      ],
+      "url": "https://www.adasouls.io/"
     }
   ]
 }
