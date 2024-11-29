@@ -21,9 +21,12 @@ function RightSide() {
       </div>
       <div className="my-16">
         <RightSideTitle title={"Side Projects"} />
-        {projects.data.map((project) => (
-          <ExperienceCard key={project.title} {...project} />
-        ))}
+        {projects.data
+          .slice()
+          .reverse()
+          .map((project) => (
+            <ExperienceCard key={project.title} {...project} />
+          ))}
       </div>
     </div>
   );

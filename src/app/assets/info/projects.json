@@ -17,6 +17,19 @@
       "brief": "By clicking here you'll have access to the Github repository to the code of this portfolio.",
       "technologies": ["TypeScript", "React", "Next.js", "Redux", "Tailwind"],
       "url": "https://github.com/diego-scarpati/portfolio-app"
+    },
+    {
+      "title": "The HM Project",
+      "brief": "This project is a Node JS app that connects to the Real-Time LinkedIn Scapper API to search and get data jobs posted on LinkedIn that can be filtered by location, company, and job title. Also connected to the OpenAI API in order to apply further filters regarding the title, technologies required and experience and if needed, generate a cover letter for the specific desired job.",
+      "technologies": [
+        "JavaScript",
+        "Node JS",
+        "Express",
+        "Python",
+        "OpenAI",
+        "Swagger"
+      ],
+      "url": "https://github.com/diego-scarpati/THMP"
     }
   ]
 }
