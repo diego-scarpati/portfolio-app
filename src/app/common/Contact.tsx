@@ -39,7 +39,8 @@ function Contact() {
       </Link>
       <Link
         // href="Diego-Scarpati.pdf"
-        href="diego-scarpati-au.pdf"
+        // href="diego-scarpati-au.pdf"
+        href="Diego_Scarpati_Resume.docx"
         download="Diego-Scarpati"
         target="_blank"
         title="Diego Scarpati's CV download link"

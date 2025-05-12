@@ -1,7 +1,24 @@
 {
   "data": [
     {
-      "employer": "Ada Souls",
+      "employer": "sastain.io",
+      "start": "MAR 2025",
+      "end": "PRESENT",
+      "title": "Fullstack Developer",
+      "brief": "Develop and maintain modern web applications using Next.js, focusing on performance and user experience. Translate UI assets into interactive UX implementations, ensuring brand consistency. Support backend development efforts in Python within the Google Cloud Platform ecosystem.",
+      "technologies": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Cursor AI",
+        "v0",
+        "Figma"
+      ],
+      "url": "https://www.adasouls.io/"
+    },
+    {
+      "employer": "AdaSouls",
       "start": "MAR 2024",
       "end": "PRESENT",
       "title": "Web3 Fullstack Developer",
