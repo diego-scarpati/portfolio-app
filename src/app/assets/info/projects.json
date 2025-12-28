@@ -19,17 +19,38 @@
       "url": "https://github.com/diego-scarpati/portfolio-app"
     },
     {
-      "title": "The HM Project",
-      "brief": "This project is a Node JS app that connects to the Real-Time LinkedIn Scapper API to search and get data jobs posted on LinkedIn that can be filtered by location, company, and job title. Also connected to the OpenAI API in order to apply further filters regarding the title, technologies required and experience and if needed, generate a cover letter for the specific desired job.",
+      "title": "Shine & Care Website",
+      "brief": "A landing page for an Australian cleaning company on the Northern Beaches area. Built with Next.js and Tailwind CSS, it features a modern, responsive design with smooth scrolling and clear calls to action.",
+      "technologies": ["TypeScript", "React", "Next.js", "Tailwind CSS", "V0"],
+      "url": "https://github.com/diego-scarpati/THMP"
+    },
+    {
+      "title": "The Hire Me Project - Backend",
+      "brief": "A Node.js and TypeScript backend that automates job ingestion and analysis. It scrapes job listings from LinkedIn and Seek, deduplicates and normalizes data, stores it in a PostgreSQL database using Sequelize, and applies rule-based and AI-driven filters to evaluate job suitability. The backend also integrates with OpenAI for resume parsing, job matching, and cover letter generation.",
       "technologies": [
-        "JavaScript",
-        "Node JS",
+        "TypeScript",
+        "Node.js",
         "Express",
-        "Python",
-        "OpenAI",
+        "PostgreSQL",
+        "Sequelize",
+        "OpenAI API",
+        "JSDOM",
         "Swagger"
       ],
       "url": "https://github.com/diego-scarpati/THMP"
+    },
+    {
+      "title": "The Hire Me Project - Frontend",
+      "brief": "A modern frontend application for exploring, filtering, and evaluating job opportunities processed by THMP. Built with Next.js and React, it provides advanced filtering, keyword highlighting, AI approval indicators, and a clean, responsive UI focused on usability and performance.",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Client-side filtering",
+        "REST APIs"
+      ],
+      "url": "https://github.com/diego-scarpati/THMP_Front"
     }
   ]
 }
