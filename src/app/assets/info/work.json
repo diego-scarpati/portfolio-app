@@ -1,9 +1,24 @@
 {
   "data": [
     {
+      "employer": "AdaSouls",
+      "start": "MAR 2024",
+      "end": "JUL 2025",
+      "title": "Web3 Fullstack Developer",
+      "brief": "Working with Solidity, React, Node.js, and other technologies to build a decentralized application",
+      "technologies": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Solidity"
+      ],
+      "url": "https://www.adasouls.io/"
+    },
+    {
       "employer": "sastain.io",
       "start": "MAR 2025",
-      "end": "PRESENT",
+      "end": "JUL 2025",
       "title": "Fullstack Developer",
       "brief": "Develop and maintain modern web applications using Next.js, focusing on performance and user experience. Translate UI assets into interactive UX implementations, ensuring brand consistency. Support backend development efforts in Python within the Google Cloud Platform ecosystem.",
       "technologies": [
@@ -16,21 +31,6 @@
         "Figma"
       ],
       "url": "https://www.sastain.io/"
-    },
-    {
-      "employer": "AdaSouls",
-      "start": "MAR 2024",
-      "end": "PRESENT",
-      "title": "Web3 Fullstack Developer",
-      "brief": "Working with Solidity, React, Node.js, and other technologies to build a decentralized application",
-      "technologies": [
-        "JavaScript",
-        "TypeScript",
-        "React",
-        "Node.js",
-        "Solidity"
-      ],
-      "url": "https://www.adasouls.io/"
     },
     {
       "employer": "Flock IT",

@@ -26,29 +26,31 @@
     },
     {
       "title": "The Hire Me Project - Backend",
-      "brief": "A Node.js and TypeScript backend that automates job ingestion and analysis. It scrapes job listings from LinkedIn and Seek, deduplicates and normalizes data, stores it in a PostgreSQL database using Sequelize, and applies rule-based and AI-driven filters to evaluate job suitability. The backend also integrates with OpenAI for resume parsing, job matching, and cover letter generation.",
+      "brief": "A production-oriented Node.js + TypeScript backend that automates end-to-end job hunting workflows. It ingests listings from LinkedIn and Seek, deduplicates and normalizes structured metadata, persists relational data in PostgreSQL (Supabase) via Sequelize, and evaluates suitability using hybrid rule-based filters and AI scoring pipelines. It includes resume parsing, embedding-based pre-filtering, GPT-driven job analysis, and automated cover letter generation.",
       "technologies": [
         "TypeScript",
         "Node.js",
         "Express",
         "PostgreSQL",
         "Sequelize",
+        "Supabase",
         "OpenAI API",
-        "JSDOM",
-        "Swagger"
+        "Embeddings (vector similarity)",
+        "Swagger / OpenAPI",
+        "Docker"
       ],
       "url": "https://github.com/diego-scarpati/THMP"
     },
     {
       "title": "The Hire Me Project - Frontend",
-      "brief": "A modern frontend application for exploring, filtering, and evaluating job opportunities processed by THMP. Built with Next.js and React, it provides advanced filtering, keyword highlighting, AI approval indicators, and a clean, responsive UI focused on usability and performance.",
+      "brief": "A Next.js + React 19 frontend for managing AI-evaluated job opportunities. It provides advanced filtering (skills, inclusions/exclusions, AI verdicts), keyword highlighting, resume management, and detailed job scoring insights. Built with Tailwind v4, it focuses on performance, UX clarity, and seamless integration with the THMP REST API.",
       "technologies": [
         "TypeScript",
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-        "Client-side filtering",
-        "REST APIs"
+        "React 19",
+        "Next.js 15",
+        "Tailwind CSS v4",
+        "REST API integration",
+        "Client-side state management"
       ],
       "url": "https://github.com/diego-scarpati/THMP_Front"
     }
