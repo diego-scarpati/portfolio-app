@@ -35,21 +35,72 @@ export const metadata: Metadata = {
     description:
       'Building production-grade web apps, landing pages & Web3 products for Australian businesses.',
     siteName: 'Diego Scarpati',
-    images: [
-      {
-        url: '/og.png',
-        width: 1200,
-        height: 630,
-        alt: 'Diego Scarpati — Senior Fullstack Developer',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Diego Scarpati — Senior Fullstack Developer, Sydney',
     description:
       'Building production-grade web apps, landing pages & Web3 products for Australian businesses.',
-    images: ['/og.png'],
+  },
+}
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Diego Scarpati — Fullstack Development',
+  url: 'https://diegoscarpati.dev',
+  description:
+    'Senior Fullstack Developer offering web apps, landing pages, and Web3 development for Australian businesses.',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Australia',
+  },
+  priceRange: '$800 - $5000+ AUD',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Development Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Landing Page',
+          description: 'Custom-designed, responsive landing page with SEO optimisation.',
+        },
+        price: '800',
+        priceCurrency: 'AUD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Web Application',
+          description: 'Full-stack web application with auth, database, and APIs.',
+        },
+        price: '3000',
+        priceCurrency: 'AUD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Web3 / Smart Contract',
+          description: 'EVM-compatible Solidity smart contracts with DApp frontend.',
+        },
+        price: '2000',
+        priceCurrency: 'AUD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'MVP Build',
+          description: 'End-to-end product from discovery to deployed MVP.',
+        },
+        price: '5000',
+        priceCurrency: 'AUD',
+      },
+    ],
   },
 }
 
@@ -94,6 +145,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
       </head>
       <body className={poppins.variable}>{children}</body>

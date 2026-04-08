@@ -1,0 +1,55 @@
+# Diego Scarpati — Senior Fullstack Developer
+
+## About
+Diego Scarpati is a Senior Fullstack Developer based in Sydney, Australia (Northern Beaches).
+He specialises in building production-grade web applications, landing pages, and Web3 products
+for Australian businesses and startups.
+
+Background: Former senior accountant at EY before transitioning to software engineering.
+This background informs a precision-driven, deadline-focused approach to engineering.
+
+Contact: diegoscarpati13@gmail.com
+WhatsApp: +61 499 404 825
+LinkedIn: https://www.linkedin.com/in/diego-scarpati/
+GitHub: https://github.com/diego-scarpati
+
+## Tech Stack
+- Frontend: Next.js 15, React 19, TypeScript, Tailwind CSS
+- Backend: Node.js, Python, Express
+- Database: Supabase (PostgreSQL), AWS
+- Web3: Solidity, EVM-compatible chains, Hardhat
+
+## Services & Pricing
+
+### Landing Page
+Starting from $800 AUD | Timeline: 1–2 weeks
+Custom-designed, mobile-first, SEO-optimised landing page. Design, dev, and deploy included.
+
+### Web App
+Starting from $3,000 AUD | Timeline: 4–8 weeks
+Full-stack web application with auth, database, and APIs. Built on Next.js + Supabase.
+
+### Web3 / Smart Contract
+Starting from $2,000 AUD | Timeline: 3–6 weeks
+EVM-compatible Solidity smart contracts with DApp frontend. Includes testing and deployment.
+
+### MVP Build
+Starting from $5,000 AUD | Timeline: 6–12 weeks
+End-to-end product from discovery to deployed MVP with CI/CD.
+
+### Starter Retainer
+$1,500 AUD/month | 20 hours/month
+Ongoing development support: feature builds, bug fixes, weekly updates.
+
+### Growth Retainer
+$2,500 AUD/month | 40 hours/month
+Dedicated engineering capacity with architecture advisory and same-day response.
+
+## How to Hire
+Submit a project brief at: https://diegoscarpati.dev/#contact
+All inquiries are responded to within 24 hours.
+
+## Selected Work
+- Shine & Care Website: https://shineandcare.com.au/
+- The Hire Me Project: https://github.com/diego-scarpati/THMP
+- Crypto Prode (Web3): https://github.com/diego-scarpati/crypto-prode
