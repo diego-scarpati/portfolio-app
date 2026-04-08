@@ -28,10 +28,13 @@ const inputClass =
 
 export function ContactSection() {
   const [status, setStatus] = useState<Status>('idle')
+  const [honeypot, setHoneypot] = useState('')
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('submitting')
+    setErrorMessage(undefined)
 
     const form = new FormData(e.currentTarget)
     const data: ContactFormData = {
@@ -41,10 +44,16 @@ export function ContactSection() {
       service: String(form.get('service') ?? ''),
       budget: String(form.get('budget') ?? ''),
       message: String(form.get('message') ?? ''),
+      honeypot,
     }
 
     const result = await submitContactForm(data)
-    setStatus(result.success ? 'success' : 'error')
+    if (result.success) {
+      setStatus('success')
+    } else {
+      setStatus('error')
+      setErrorMessage(result.error)
+    }
   }
 
   return (
@@ -72,6 +81,17 @@ export function ContactSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Honeypot — hidden from real users, bots fill this */}
+              <input
+                type="text"
+                name="website"
+                aria-hidden="true"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label
@@ -191,7 +211,7 @@ export function ContactSection() {
 
               {status === 'error' && (
                 <p className="text-sm text-red-400">
-                  Something went wrong. Please email me directly.
+                  {errorMessage ?? 'Something went wrong. Please email me directly.'}
                 </p>
               )}
 
