@@ -25,9 +25,9 @@ export function HeroSection() {
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
             Diego Scarpati
           </h1>
-          <h2 className="text-2xl md:text-3xl font-medium text-[var(--accent)] mb-6">
+          <p className="text-2xl md:text-3xl font-medium text-[var(--accent)] mb-6">
             Senior Fullstack Developer
-          </h2>
+          </p>
           <p className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-2xl">
             Building production-grade web apps, landing pages & Web3 products for Australian businesses.
           </p>

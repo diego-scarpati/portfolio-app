@@ -31,13 +31,7 @@ export function WorkSection() {
                 </span>
               </div>
               <p
-                className="text-sm text-[var(--text-secondary)] mb-4 flex-1"
-                style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
+                className="text-sm text-[var(--text-secondary)] mb-4 flex-1 line-clamp-2"
               >
                 {project.brief}
               </p>

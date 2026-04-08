@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/ui/Navbar'
+import { BackToTop } from '@/components/ui/BackToTop'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { PlansSection } from '@/components/sections/PlansSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
@@ -18,6 +19,7 @@ export default function Home() {
         <AboutSection />
         <ContactSection />
       </main>
+      <BackToTop />
     </>
   )
 }

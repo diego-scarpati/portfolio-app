@@ -75,9 +75,9 @@ export function PlansSection() {
               key={plan.id}
               className="bg-[var(--bg-card)] border border-[var(--border)] rounded-lg p-6"
             >
-              <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">
                 {plan.name}
-              </h4>
+              </h3>
               <p className="text-2xl font-bold text-[var(--accent)] mb-1">
                 ${plan.pricePerMonth.toLocaleString()} {plan.currency}
                 <span className="text-sm text-[var(--text-muted)] font-normal"> / month</span>
