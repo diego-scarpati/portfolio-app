@@ -1,0 +1,39 @@
+export interface WorkItem {
+  employer: string
+  start: string
+  end: string
+  title: string
+  brief: string
+  technologies: string[]
+  url: string
+}
+
+export const workItems: WorkItem[] = [
+  {
+    employer: 'AdaSouls',
+    start: 'MAR 2024',
+    end: 'JUL 2025',
+    title: 'Web3 Fullstack Developer',
+    brief: 'Working with Solidity, React, Node.js, and other technologies to build a decentralized application',
+    technologies: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Solidity'],
+    url: 'https://www.adasouls.io/',
+  },
+  {
+    employer: 'sastain.io',
+    start: 'MAR 2025',
+    end: 'JUL 2025',
+    title: 'Fullstack Developer',
+    brief: 'Develop and maintain modern web applications using Next.js, focusing on performance and user experience. Translate UI assets into interactive UX implementations, ensuring brand consistency. Support backend development efforts in Python within the Google Cloud Platform ecosystem.',
+    technologies: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Cursor AI', 'v0', 'Figma'],
+    url: 'https://www.sastain.io/',
+  },
+  {
+    employer: 'Flock IT',
+    start: 'NOV 2022',
+    end: 'SEP 2023',
+    title: 'R&D Analyst',
+    brief: 'React Native leader for a MVP regarding Health and Digital Identity',
+    technologies: ['JavaScript', 'TypeScript', 'React', 'React Native', 'Redux', 'Expo', 'AWS'],
+    url: 'https://www.lifeid.ar/',
+  },
+]
