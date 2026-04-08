@@ -10,6 +10,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://diegoscarpati.dev'),
   title: 'Diego Scarpati — Senior Fullstack Developer, Sydney',
   description:
     'Senior Fullstack Developer based in Sydney, Australia. Building production-grade web apps, landing pages & Web3 products for Australian businesses.',

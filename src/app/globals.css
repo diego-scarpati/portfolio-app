@@ -1,70 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 36, 48, 66;
-  --background-end-rgb: 36, 48, 66;
-  --bs-50: #f5f7fa;
-  --bs-100: #eaeef4;
-  --bs-200: #cfd9e8;
-  --bs-300: #a5bad4;
-  --bs-400: #7596bb;
-  --bs-500: #5378a4;
-  --bs-600: #405f89;
-  --bs-700: #354d6f;
-  --bs-800: #2f425d;
-  --bs-900: #243042;
-  --bs-950: #1d2634;
+@theme {
+  --color-big-stone-50: #f5f7fa;
+  --color-big-stone-100: #eaeef4;
+  --color-big-stone-200: #cfd9e8;
+  --color-big-stone-300: #a5bad4;
+  --color-big-stone-400: #7596bb;
+  --color-big-stone-500: #5378a4;
+  --color-big-stone-600: #405f89;
+  --color-big-stone-700: #354d6f;
+  --color-big-stone-800: #2f425d;
+  --color-big-stone-900: #243042;
+  --color-big-stone-950: #1d2634;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 36, 48, 66;
-    --background-end-rgb: 36, 48, 66;
-  }
-} */
+/* Light theme (default) */
+:root {
+  --bg-primary: #eaeef4;
+  --bg-secondary: #f5f7fa;
+  --bg-card: #ffffff;
+  --border: #cfd9e8;
+  --text-primary: #1d2634;
+  --text-secondary: #354d6f;
+  --text-muted: #5378a4;
+  --accent: #243042;
+  --accent-hover: #354d6f;
+  --accent-text: #eaeef4;
+  --tag-bg: #eaeef4;
+  --tag-text: #405f89;
+  --tag-border: #cfd9e8;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-primary: #1d2634;
+  --bg-secondary: #243042;
+  --bg-card: #2f425d;
+  --border: #354d6f;
+  --text-primary: #eaeef4;
+  --text-secondary: #a5bad4;
+  --text-muted: #5378a4;
+  --accent: #405f89;
+  --accent-hover: #5378a4;
+  --accent-text: #eaeef4;
+  --tag-bg: #243042;
+  --tag-text: #7596bb;
+  --tag-border: #354d6f;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
 body {
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  position: relative;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  color: var(--bs-200);
-  /* letter-spacing: -1px; */
-  /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
-}
-
-h1 {
-  font-size: 3rem;
-}
-h2 {
-  font-size: 2.25rem;
-}
-h3 {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-p {
-  /* font-size: 0.875rem;
-  line-height: 1.25rem; */
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-family: var(--font-poppins), sans-serif;
 }
