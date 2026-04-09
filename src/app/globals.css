@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../";
 
 @theme {
   --color-big-stone-50: #f5f7fa;
@@ -14,7 +15,7 @@
   --color-big-stone-950: #1d2634;
 }
 
-/* Light theme (default) */
+/* ─── Light theme (default) ─── */
 :root {
   --bg-primary: #eaeef4;
   --bg-secondary: #f5f7fa;
@@ -31,21 +32,21 @@
   --tag-border: #cfd9e8;
 }
 
-/* Dark theme */
+/* ─── Dark theme ─── */
 [data-theme="dark"] {
-  --bg-primary: #1d2634;
-  --bg-secondary: #243042;
-  --bg-card: #2f425d;
-  --border: #354d6f;
+  --bg-primary: #151e2d;
+  --bg-secondary: #1d2a3e;
+  --bg-card: #243348;
+  --border: #2d4060;
   --text-primary: #eaeef4;
-  --text-secondary: #a5bad4;
-  --text-muted: #5378a4;
-  --accent: #405f89;
-  --accent-hover: #5378a4;
+  --text-secondary: #8faac8;
+  --text-muted: #4d6a8a;
+  --accent: #4a72a8;
+  --accent-hover: #5a84bc;
   --accent-text: #eaeef4;
-  --tag-bg: #243042;
-  --tag-text: #7596bb;
-  --tag-border: #354d6f;
+  --tag-bg: #1a2638;
+  --tag-text: #6a95c8;
+  --tag-border: #2d4060;
 }
 
 * {
@@ -58,11 +59,32 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Grain texture overlay — adds depth and premium feel */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+/* Typography — Syne for all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-syne), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 @layer utilities {
@@ -71,5 +93,30 @@ body {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background-color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .font-display {
+    font-family: var(--font-syne), system-ui, sans-serif;
   }
 }

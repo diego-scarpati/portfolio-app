@@ -24,7 +24,7 @@ const BUDGETS = [
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const inputClass =
-  'w-full bg-[var(--bg-card)] border border-[var(--border)] rounded px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors'
+  'w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-200 bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)]'
 
 export function ContactSection() {
   const [status, setStatus] = useState<Status>('idle')
@@ -57,19 +57,28 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-28">
+    <section id="contact" className="py-24 md:py-32" style={{ background: "var(--bg-secondary)" }}>
       <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-12">
-          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-3">
-            06 / Send a Brief
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-3">
+        <div className="mb-16">
+          <p className="section-label">06 / Send a Brief</p>
+          <h2
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontWeight: 800,
+              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+              color: "var(--text-primary)",
+              letterSpacing: "-0.02em",
+            }}
+            className="mb-3"
+          >
             Got a project in mind?
           </h2>
-          <p className="text-lg text-[var(--text-secondary)]">Tell me about it.</p>
+          <p style={{ fontFamily: "var(--font-body)", color: "var(--text-secondary)", fontSize: "1.05rem" }}>
+            Tell me about it. I respond within 24 hours.
+          </p>
         </div>
 
-        <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-lg p-6 md:p-8">
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }} className="p-8 md:p-10">
           {status === 'success' ? (
             <div className="py-16 text-center">
               <p className="text-2xl font-bold text-[var(--text-primary)] mb-2">
@@ -218,7 +227,14 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full md:w-auto px-6 py-3 text-sm font-semibold tracking-wider uppercase bg-[var(--accent)] text-[var(--accent-text)] rounded hover:bg-[var(--accent-hover)] transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  letterSpacing: "0.15em",
+                  background: "var(--accent)",
+                  color: "var(--accent-text)",
+                }}
+                className="w-full md:w-auto px-8 py-3.5 text-[11px] uppercase hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === 'submitting' ? 'Sending...' : 'Send Brief →'}
               </button>

@@ -1,11 +1,12 @@
-import { Navbar } from '@/components/ui/Navbar'
-import { BackToTop } from '@/components/ui/BackToTop'
-import { HeroSection } from '@/components/sections/HeroSection'
-import { PlansSection } from '@/components/sections/PlansSection'
-import { ExperienceSection } from '@/components/sections/ExperienceSection'
-import { WorkSection } from '@/components/sections/WorkSection'
-import { AboutSection } from '@/components/sections/AboutSection'
-import { ContactSection } from '@/components/sections/ContactSection'
+import { Navbar } from "@/components/ui/Navbar";
+import { Footer } from "@/components/ui/Footer";
+import { BackToTop } from "@/components/ui/BackToTop";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { PlansSection } from "@/components/sections/PlansSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { WorkSection } from "@/components/sections/WorkSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
@@ -19,7 +20,8 @@ export default function Home() {
         <AboutSection />
         <ContactSection />
       </main>
+      <Footer />
       <BackToTop />
     </>
-  )
+  );
 }

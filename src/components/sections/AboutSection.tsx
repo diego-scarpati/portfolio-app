@@ -16,47 +16,84 @@ const FACTS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 md:py-28">
+    <section id="about" className="py-24 md:py-32" style={{ background: "var(--bg-primary)" }}>
       <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-12">
-          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-3">
-            05 / About
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)]">
+
+        <div className="mb-16">
+          <p className="section-label">05 / About</p>
+          <h2 style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--text-primary)" }}>
             A bit about me
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="md:col-span-2 space-y-5 text-[var(--text-secondary)] text-lg leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-16">
+
+          {/* Copy */}
+          <div
+            className="space-y-6"
+            style={{ fontFamily: "var(--font-body)", color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.8 }}
+          >
             <p>
               I&apos;m a Senior Fullstack Developer based in Sydney&apos;s Northern Beaches. I specialise in building production-grade web applications, landing pages, and Web3 products for Australian businesses and startups.
             </p>
             <p>
-              Before switching to engineering, I spent years as a senior accountant at EY. That background shapes how I work — I think in systems, measure what matters, and take deadlines seriously. I bring financial precision to product thinking.
+              Before switching to engineering, I spent years as a senior accountant at EY. That background shapes how I work — I think in systems, measure what matters, and take deadlines seriously.
             </p>
             <p>
               I work with Next.js, React, TypeScript, Supabase, Node.js, Python, and Solidity. When I&apos;m not building, I&apos;m surfing the Northern Beaches.
             </p>
           </div>
 
-          <aside className="bg-[var(--bg-card)] border border-[var(--border)] rounded-lg p-6 h-fit">
-            <h3 className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-4">
+          {/* Facts card */}
+          <aside
+            className="h-fit"
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              padding: "1.75rem",
+            }}
+          >
+            <p
+              className="mb-6"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "0.62rem",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--text-muted)",
+              }}
+            >
               Quick facts
-            </h3>
-            <dl className="space-y-4">
+            </p>
+            <dl className="space-y-5">
               {FACTS.map((f) => (
                 <div key={f.label}>
-                  <dt className="text-xs uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <dt
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "var(--text-muted)",
+                      marginBottom: "0.25rem",
+                    }}
+                  >
                     {f.label}
                   </dt>
-                  <dd className="text-sm text-[var(--text-primary)]">
+                  <dd
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.88rem",
+                      color: "var(--text-primary)",
+                    }}
+                  >
                     {f.href ? (
                       <a
                         href={f.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-[var(--accent)] transition-colors"
+                        className="hover:opacity-75 transition-opacity duration-200"
+                        style={{ color: "var(--accent)" }}
                       >
                         {f.value} ↗
                       </a>

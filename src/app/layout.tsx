@@ -1,11 +1,20 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Syne, DM_Sans } from 'next/font/google'
 import './globals.css'
 
-const poppins = Poppins({
+// Display font — bold, geometric, distinctive
+const syne = Syne({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-poppins',
+  weight: ['400', '700', '800'],
+  variable: '--font-syne',
+  display: 'swap',
+})
+
+// Body font — clean, modern, readable
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-body',
   display: 'swap',
 })
 
@@ -151,7 +160,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
       </head>
-      <body className={poppins.variable}>{children}</body>
+      <body className={`${syne.variable} ${dmSans.variable}`}>{children}</body>
     </html>
   )
 }

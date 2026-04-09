@@ -33,8 +33,14 @@ export function Navbar() {
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
         <a
           href="#"
-          className="text-sm font-bold tracking-widest text-[var(--text-primary)] uppercase"
           onClick={closeMobile}
+          style={{
+            fontFamily: "var(--font-syne)",
+            fontWeight: 800,
+            fontSize: "1.1rem",
+            letterSpacing: "0.08em",
+            color: "var(--text-primary)",
+          }}
         >
           DS
         </a>
@@ -44,7 +50,16 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+              className="transition-colors duration-200"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "0.72rem",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "var(--text-muted)",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               {link.label}
             </a>
@@ -55,7 +70,19 @@ export function Navbar() {
           <ThemeToggle />
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center px-4 py-2 text-xs font-semibold tracking-wider uppercase bg-[var(--accent)] text-[var(--accent-text)] rounded hover:bg-[var(--accent-hover)] transition-colors"
+            className="hidden md:inline-flex items-center"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              background: "var(--accent)",
+              color: "var(--accent-text)",
+              padding: "0.5rem 1.1rem",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
           >
             Hire Me
           </a>
