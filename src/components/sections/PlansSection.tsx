@@ -8,7 +8,16 @@ export function PlansSection() {
         {/* Header */}
         <div className="max-w-xl mb-16">
           <p className="section-label">02 / What I Build</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-3 leading-tight">
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.01em',
+              lineHeight: 1.1,
+              marginBottom: '0.75rem',
+            }}
+          >
             Transparent pricing.<br />No surprises.
           </h2>
           <p className="text-[var(--text-secondary)]">
@@ -21,11 +30,17 @@ export function PlansSection() {
           {servicePlans.map((plan) => (
             <div
               key={plan.id}
-              className={`relative flex flex-col rounded-xl p-7 border transition-all duration-200 group hover:-translate-y-0.5 ${
+              className={`relative flex flex-col p-7 border transition-all duration-200 group hover:-translate-y-1 ${
                 plan.popular
-                  ? 'bg-[var(--bg-card)] border-[var(--accent)]'
-                  : 'bg-[var(--bg-card)] border-[var(--border)] hover:border-[var(--accent)]'
+                  ? 'border-[var(--accent)]'
+                  : 'border-[var(--glass-border)] hover:border-[var(--accent)]'
               }`}
+              style={{
+                background: 'var(--glass-bg)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderRadius: 20,
+              }}
             >
               {plan.popular && (
                 <span className="absolute top-0 right-7 -translate-y-1/2 bg-[var(--accent)] text-[var(--accent-text)] text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
@@ -65,11 +80,12 @@ export function PlansSection() {
 
               <a
                 href="#contact"
-                className={`block text-center py-3 text-xs font-bold tracking-widest uppercase rounded-lg transition-colors duration-200 ${
+                className={`block text-center py-3 text-xs font-bold tracking-widest uppercase transition-colors duration-200 ${
                   plan.popular
                     ? 'bg-[var(--accent)] text-[var(--accent-text)] hover:bg-[var(--accent-hover)]'
-                    : 'border border-[var(--border)] text-[var(--text-muted)] group-hover:border-[var(--accent)] group-hover:text-[var(--text-primary)]'
+                    : 'border border-[var(--glass-border)] text-[var(--text-muted)] group-hover:border-[var(--accent)] group-hover:text-[var(--text-primary)]'
                 }`}
+                style={{ borderRadius: 999 }}
               >
                 Send a Brief →
               </a>
@@ -92,7 +108,14 @@ export function PlansSection() {
             {retainerPlans.map((plan) => (
               <div
                 key={plan.id}
-                className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-7 hover:border-[var(--accent)] transition-colors duration-200"
+                className="border border-[var(--glass-border)] hover:border-[var(--accent)] transition-colors duration-200"
+                style={{
+                  background: 'var(--glass-bg)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  borderRadius: 20,
+                  padding: '1.75rem',
+                }}
               >
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <h4 className="text-lg font-bold text-[var(--text-primary)]">
@@ -127,7 +150,8 @@ export function PlansSection() {
 
           <a
             href="#contact"
-            className="block w-full text-center py-4 text-sm font-bold tracking-widest uppercase bg-[var(--accent)] text-[var(--accent-text)] rounded-xl hover:bg-[var(--accent-hover)] transition-colors duration-200"
+            className="block w-full text-center py-4 text-sm font-bold tracking-widest uppercase bg-[var(--accent)] text-[var(--accent-text)] hover:bg-[var(--accent-hover)] transition-colors duration-200"
+            style={{ borderRadius: 999 }}
           >
             Start a Project →
           </a>
