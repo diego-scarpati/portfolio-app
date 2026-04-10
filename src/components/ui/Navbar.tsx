@@ -28,6 +28,7 @@ export function Navbar() {
         }}
       >
         <nav
+          aria-label="Primary navigation"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -105,6 +106,7 @@ export function Navbar() {
 
       {/* ── Mobile top bar ── */}
       <nav
+        aria-label="Mobile navigation"
         className="md:hidden"
         style={{
           position: 'fixed',

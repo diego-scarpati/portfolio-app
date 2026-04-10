@@ -10,6 +10,9 @@ export function HeroSection() {
   const blob3 = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mq.matches) return
+
     const onScroll = () => {
       const y = window.scrollY
       if (blob1.current) blob1.current.style.transform = `translateY(${y * 0.15}px)`
@@ -66,7 +69,7 @@ export function HeroSection() {
           } as React.CSSProperties}
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+            <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
           <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
