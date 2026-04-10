@@ -107,7 +107,7 @@ export function Navbar() {
       {/* ── Mobile top bar ── */}
       <nav
         aria-label="Mobile navigation"
-        className="md:hidden"
+        className="flex md:hidden"
         style={{
           position: 'fixed',
           top: 0,
@@ -115,7 +115,6 @@ export function Navbar() {
           right: 0,
           zIndex: 100,
           height: 56,
-          display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 1.25rem',
