@@ -25,7 +25,7 @@ export function Footer() {
         <a
           href="#"
           style={{
-            fontFamily: "var(--font-syne)",
+            fontFamily: "var(--font-display)",
             fontWeight: 800,
             fontSize: "1rem",
             letterSpacing: "0.08em",
