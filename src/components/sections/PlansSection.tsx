@@ -1,17 +1,46 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import { servicePlans, retainerPlans } from '@/data/services'
 
 export function PlansSection() {
-  return (
-    <section id="plans" className="py-24 md:py-32 bg-[var(--bg-secondary)] flex flex-col justify-center" style={{ minHeight: '100dvh' }}>
-      <div className="max-w-5xl mx-auto px-6">
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
-        {/* Header */}
-        <div className="max-w-xl mb-16">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const section = sectionRef.current
+    if (section) observer.observe(section)
+    cardRefs.current.forEach((card) => { if (card) observer.observe(card) })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section
+      ref={sectionRef}
+      id="plans"
+      className="reveal-on-scroll py-24 md:py-32 flex flex-col justify-center"
+      style={{ background: 'var(--bg-secondary)', minHeight: '100dvh' }}
+    >
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
+
+        <div style={{ marginBottom: '3rem' }}>
           <p className="section-label">02 / What I Build</p>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
               color: 'var(--text-primary)',
               letterSpacing: '-0.01em',
               lineHeight: 1.1,
@@ -20,59 +49,89 @@ export function PlansSection() {
           >
             Transparent pricing.<br />No surprises.
           </h2>
-          <p className="text-[var(--text-secondary)]">
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.7 }}>
             Fixed packages with clear deliverables. You know what you&apos;re getting before we start.
           </p>
         </div>
 
         {/* Service plan cards — 2×2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16">
-          {servicePlans.map((plan) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ marginBottom: '4rem' }}>
+          {servicePlans.map((plan, i) => (
             <div
               key={plan.id}
-              className={`relative flex flex-col p-7 border transition-all duration-200 group hover:-translate-y-1 ${
+              ref={(el) => { cardRefs.current[i] = el }}
+              className={`reveal-card relative flex flex-col group ${
                 plan.popular
-                  ? 'border-[var(--accent)]'
-                  : 'border-[var(--glass-border)] hover:border-[var(--accent)]'
-              }`}
+                  ? 'border border-[var(--accent)]'
+                  : 'border border-[var(--glass-border)] hover:border-[var(--accent)]'
+              } transition-all duration-200 hover:-translate-y-1`}
               style={{
+                transitionDelay: `${i * 90}ms`,
                 background: 'var(--glass-bg)',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
                 borderRadius: 20,
+                padding: '1.75rem',
               }}
             >
               {plan.popular && (
-                <span className="absolute top-0 right-7 -translate-y-1/2 bg-[var(--accent)] text-[var(--accent-text)] text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: '1.75rem',
+                    transform: 'translateY(-50%)',
+                    background: 'var(--accent)',
+                    color: 'var(--accent-text)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.58rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    padding: '0.25rem 0.75rem',
+                    borderRadius: 999,
+                  }}
+                >
                   Popular
                 </span>
               )}
 
-              <div className="flex items-start justify-between gap-4 mb-5">
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.25rem' }}>
                 <div>
-                  <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 600,
+                      fontSize: '1.05rem',
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.3,
+                      marginBottom: '0.2rem',
+                    }}
+                  >
                     {plan.name}
                   </h3>
-                  <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider">
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
                     {plan.timeline}
                   </p>
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="text-2xl font-bold text-[var(--accent)] leading-none">
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
                     ${plan.startingPrice.toLocaleString()}
                   </p>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">{plan.currency}</p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.6rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+                    {plan.currency}
+                  </p>
                 </div>
               </div>
 
-              <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '1.25rem', flex: 1 }}>
                 {plan.description}
               </p>
 
-              <ul className="space-y-2.5 mb-7 flex-1">
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 {plan.features.map((f) => (
-                  <li key={f} className="text-sm text-[var(--text-secondary)] flex items-start gap-2.5">
-                    <span className="text-[var(--accent)] mt-0.5 shrink-0 text-base leading-tight">✓</span>
+                  <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                    <span style={{ color: 'var(--accent)', flexShrink: 0, lineHeight: 1.4 }}>✓</span>
                     <span>{f}</span>
                   </li>
                 ))}
@@ -80,12 +139,21 @@ export function PlansSection() {
 
               <a
                 href="#contact"
-                className={`block text-center py-3 text-xs font-bold tracking-widest uppercase transition-colors duration-200 ${
+                className={`block text-center transition-colors duration-200 group-hover:opacity-90 ${
                   plan.popular
                     ? 'bg-[var(--accent)] text-[var(--accent-text)] hover:bg-[var(--accent-hover)]'
                     : 'border border-[var(--glass-border)] text-[var(--text-muted)] group-hover:border-[var(--accent)] group-hover:text-[var(--text-primary)]'
                 }`}
-                style={{ borderRadius: 999 }}
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  padding: '0.75rem 1rem',
+                  borderRadius: 999,
+                }}
               >
                 Send a Brief →
               </a>
@@ -94,22 +162,33 @@ export function PlansSection() {
         </div>
 
         {/* Retainer section */}
-        <div className="border-t border-[var(--border)] pt-14">
-          <div className="mb-10">
-            <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2">
+        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '3rem' }}>
+          <div style={{ marginBottom: '2rem' }}>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 600,
+                fontSize: 'clamp(1.4rem, 3vw, 1.9rem)',
+                color: 'var(--text-primary)',
+                letterSpacing: '-0.01em',
+                marginBottom: '0.4rem',
+              }}
+            >
               Ongoing Collaboration
             </h3>
-            <p className="text-[var(--text-secondary)]">
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>
               Dedicated development capacity on a monthly basis.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-            {retainerPlans.map((plan) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ marginBottom: '2rem' }}>
+            {retainerPlans.map((plan, i) => (
               <div
                 key={plan.id}
-                className="border border-[var(--glass-border)] hover:border-[var(--accent)] transition-colors duration-200"
+                ref={(el) => { cardRefs.current[servicePlans.length + i] = el }}
+                className="reveal-card border border-[var(--glass-border)] hover:border-[var(--accent)] transition-colors duration-200"
                 style={{
+                  transitionDelay: `${(servicePlans.length + i) * 90}ms`,
                   background: 'var(--glass-bg)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
@@ -117,29 +196,37 @@ export function PlansSection() {
                   padding: '1.75rem',
                 }}
               >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <h4 className="text-lg font-bold text-[var(--text-primary)]">
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <h4
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 600,
+                      fontSize: '1.05rem',
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.3,
+                    }}
+                  >
                     {plan.name}
                   </h4>
-                  <div className="text-right shrink-0">
-                    <p className="text-xl font-bold text-[var(--accent)] leading-none">
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
                       ${plan.pricePerMonth.toLocaleString()}
                     </p>
-                    <p className="text-xs text-[var(--text-muted)] mt-1">
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.6rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                       {plan.currency} / month
                     </p>
                   </div>
                 </div>
-                <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-3">
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                   {plan.hoursPerMonth} hours / month
                 </p>
-                <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
                   {plan.description}
                 </p>
-                <ul className="space-y-2">
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   {plan.features.map((f) => (
-                    <li key={f} className="text-sm text-[var(--text-secondary)] flex items-start gap-2.5">
-                      <span className="text-[var(--accent)] mt-0.5 shrink-0">✓</span>
+                    <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                      <span style={{ color: 'var(--accent)', flexShrink: 0 }}>✓</span>
                       <span>{f}</span>
                     </li>
                   ))}
@@ -150,8 +237,24 @@ export function PlansSection() {
 
           <a
             href="#contact"
-            className="block w-full text-center py-4 text-sm font-bold tracking-widest uppercase bg-[var(--accent)] text-[var(--accent-text)] hover:bg-[var(--accent-hover)] transition-colors duration-200"
-            style={{ borderRadius: 999 }}
+            style={{
+              display: 'block',
+              width: '100%',
+              textAlign: 'center',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.65rem',
+              fontWeight: 700,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              background: 'var(--accent)',
+              color: 'var(--accent-text)',
+              padding: '1rem',
+              borderRadius: 999,
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--accent-hover)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'var(--accent)')}
           >
             Start a Project →
           </a>

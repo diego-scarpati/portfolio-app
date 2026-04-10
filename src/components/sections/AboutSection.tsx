@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+
 const FACTS = [
   { label: 'Location', value: 'Sydney, Northern Beaches' },
   { label: 'Stack', value: 'Next.js · React · TS · Node · Python · Solidity' },
@@ -15,11 +19,38 @@ const FACTS = [
 ]
 
 export function AboutSection() {
-  return (
-    <section id="about" className="py-24 md:py-32 flex flex-col justify-center" style={{ background: 'var(--bg-primary)', minHeight: '100dvh' }}>
-      <div className="max-w-5xl mx-auto px-6">
+  const sectionRef = useRef<HTMLElement>(null)
+  const copyRef = useRef<HTMLDivElement>(null)
+  const asideRef = useRef<HTMLElement>(null)
 
-        <div className="mb-16">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const els = [sectionRef.current, copyRef.current, asideRef.current]
+    els.forEach((el) => { if (el) observer.observe(el) })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section
+      ref={sectionRef}
+      id="about"
+      className="reveal-on-scroll py-24 md:py-32 flex flex-col justify-center"
+      style={{ background: 'var(--bg-primary)', minHeight: '100dvh' }}
+    >
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
+
+        <div style={{ marginBottom: '3rem' }}>
           <p className="section-label">05 / About</p>
           <h2
             style={{
@@ -33,12 +64,21 @@ export function AboutSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-12">
 
           {/* Copy */}
           <div
-            className="space-y-6"
-            style={{ fontFamily: "var(--font-body)", color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.8 }}
+            ref={copyRef}
+            className="reveal-card"
+            style={{
+              fontFamily: 'var(--font-body)',
+              color: 'var(--text-secondary)',
+              fontSize: '0.95rem',
+              lineHeight: 1.8,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
+            }}
           >
             <p>
               I&apos;m a Senior Fullstack Developer based in Sydney&apos;s Northern Beaches. I specialise in building production-grade web applications, landing pages, and Web3 products for Australian businesses and startups.
@@ -53,8 +93,10 @@ export function AboutSection() {
 
           {/* Facts card */}
           <aside
-            className="h-fit"
+            ref={asideRef}
+            className="reveal-card h-fit"
             style={{
+              transitionDelay: '90ms',
               background: 'var(--glass-bg)',
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
@@ -64,37 +106,37 @@ export function AboutSection() {
             }}
           >
             <p
-              className="mb-6"
               style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "0.62rem",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "var(--text-muted)",
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.6rem',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: 'var(--text-muted)',
+                marginBottom: '1.25rem',
               }}
             >
               Quick facts
             </p>
-            <dl className="space-y-5">
+            <dl style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
               {FACTS.map((f) => (
                 <div key={f.label}>
                   <dt
                     style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.6rem",
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--text-muted)",
-                      marginBottom: "0.25rem",
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.58rem',
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: 'var(--text-muted)',
+                      marginBottom: '0.2rem',
                     }}
                   >
                     {f.label}
                   </dt>
                   <dd
                     style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.88rem",
-                      color: "var(--text-primary)",
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.85rem',
+                      color: 'var(--text-primary)',
                     }}
                   >
                     {f.href ? (
@@ -102,8 +144,9 @@ export function AboutSection() {
                         href={f.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:opacity-75 transition-opacity duration-200"
-                        style={{ color: "var(--accent)" }}
+                        style={{ color: 'var(--accent-2)', textDecoration: 'none', transition: 'opacity 0.2s' }}
+                        onMouseEnter={e => (e.currentTarget.style.opacity = '0.75')}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                       >
                         {f.value} ↗
                       </a>

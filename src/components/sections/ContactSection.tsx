@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { submitContactForm, type ContactFormData } from '@/app/actions/contact'
 
 const SERVICES = [
@@ -24,12 +24,26 @@ const BUDGETS = [
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const inputClass =
-  'w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-200 bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)]'
+  'w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-200 bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] rounded-xl'
 
 export function ContactSection() {
+  const sectionRef = useRef<HTMLElement>(null)
   const [status, setStatus] = useState<Status>('idle')
   const [honeypot, setHoneypot] = useState('')
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible')
+        })
+      },
+      { threshold: 0.1 },
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -57,8 +71,13 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-32 flex flex-col justify-center" style={{ background: 'var(--bg-secondary)', minHeight: '100dvh' }}>
-      <div className="max-w-5xl mx-auto px-6">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="reveal-on-scroll py-24 md:py-32 flex flex-col justify-center"
+      style={{ background: 'var(--bg-secondary)', minHeight: '100dvh' }}
+    >
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
         <div className="mb-16">
           <p className="section-label">06 / Send a Brief</p>
           <h2
