@@ -128,10 +128,6 @@ h1, h2, h3, h4, h5, h6 {
     50%       { opacity: 0.8; }
   }
 
-  @keyframes ping {
-    75%, 100% { transform: scale(2); opacity: 0; }
-  }
-
   .animate-hero-in {
     animation: heroIn var(--hero-duration, 0.6s) var(--hero-delay, 0s) ease both;
   }
@@ -147,6 +143,7 @@ h1, h2, h3, h4, h5, h6 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .section-label {
