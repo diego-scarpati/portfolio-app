@@ -21,7 +21,14 @@ export function AboutSection() {
 
         <div className="mb-16">
           <p className="section-label">05 / About</p>
-          <h2 style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--text-primary)" }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.01em',
+            }}
+          >
             A bit about me
           </h2>
         </div>
@@ -48,9 +55,12 @@ export function AboutSection() {
           <aside
             className="h-fit"
             style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              padding: "1.75rem",
+              background: 'var(--glass-bg)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid var(--glass-border)',
+              padding: '1.75rem',
+              borderRadius: 20,
             }}
           >
             <p

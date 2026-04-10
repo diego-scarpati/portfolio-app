@@ -63,11 +63,11 @@ export function ContactSection() {
           <p className="section-label">06 / Send a Brief</p>
           <h2
             style={{
-              fontFamily: "var(--font-syne)",
-              fontWeight: 800,
-              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-              color: "var(--text-primary)",
-              letterSpacing: "-0.02em",
+              fontFamily: 'var(--font-display)',
+              fontWeight: 700,
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.02em',
             }}
             className="mb-3"
           >
@@ -78,7 +78,16 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }} className="p-8 md:p-10">
+        <div
+          style={{
+            background: 'var(--glass-bg)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid var(--glass-border)',
+            borderRadius: 20,
+          }}
+          className="p-8 md:p-10"
+        >
           {status === 'success' ? (
             <div className="py-16 text-center">
               <p className="text-2xl font-bold text-[var(--text-primary)] mb-2">
@@ -228,11 +237,12 @@ export function ContactSection() {
                 type="submit"
                 disabled={status === 'submitting'}
                 style={{
-                  fontFamily: "var(--font-body)",
+                  fontFamily: 'var(--font-body)',
                   fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  background: "var(--accent)",
-                  color: "var(--accent-text)",
+                  letterSpacing: '0.15em',
+                  background: 'var(--accent)',
+                  color: 'var(--accent-text)',
+                  borderRadius: 999,
                 }}
                 className="w-full md:w-auto px-8 py-3.5 text-[11px] uppercase hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
