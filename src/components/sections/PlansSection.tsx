@@ -2,7 +2,7 @@ import { servicePlans, retainerPlans } from '@/data/services'
 
 export function PlansSection() {
   return (
-    <section id="plans" className="py-24 md:py-32 bg-[var(--bg-secondary)]">
+    <section id="plans" className="py-24 md:py-32 bg-[var(--bg-secondary)] flex flex-col justify-center" style={{ minHeight: '100dvh' }}>
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Header */}

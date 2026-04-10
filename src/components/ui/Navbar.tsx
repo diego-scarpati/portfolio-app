@@ -34,10 +34,10 @@ export function Navbar() {
             alignItems: 'center',
             gap: '2rem',
             padding: '0.65rem 1.5rem',
-            background: 'rgba(15,24,37,0.6)',
+            background: 'var(--nav-bg)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid var(--glass-border)',
+            border: '1px solid var(--nav-border)',
             borderRadius: 999,
             whiteSpace: 'nowrap',
           }}
@@ -48,7 +48,7 @@ export function Navbar() {
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
               fontSize: '1rem',
-              color: 'var(--text-primary)',
+              color: 'var(--nav-text)',
               textDecoration: 'none',
               letterSpacing: '0.03em',
             }}
@@ -66,12 +66,12 @@ export function Navbar() {
                   fontSize: '0.62rem',
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  color: 'var(--text-muted)',
+                  color: 'var(--nav-muted)',
                   textDecoration: 'none',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--nav-text)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--nav-muted)')}
               >
                 {link.label}
               </a>
@@ -118,17 +118,17 @@ export function Navbar() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 1.25rem',
-          background: mobileOpen ? 'var(--bg-primary)' : 'rgba(15,24,37,0.6)',
+          background: mobileOpen ? 'var(--bg-primary)' : 'var(--nav-bg)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid var(--glass-border)',
+          borderBottom: '1px solid var(--nav-border)',
           transition: 'background 0.2s',
         }}
       >
         <a
           href="#"
           onClick={close}
-          style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', textDecoration: 'none' }}
+          style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--nav-text)', textDecoration: 'none' }}
         >
           DS
         </a>

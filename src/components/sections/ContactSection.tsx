@@ -57,7 +57,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-32" style={{ background: "var(--bg-secondary)" }}>
+    <section id="contact" className="py-24 md:py-32 flex flex-col justify-center" style={{ background: 'var(--bg-secondary)', minHeight: '100dvh' }}>
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-16">
           <p className="section-label">06 / Send a Brief</p>

@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="pt-14">
+      <main>
         <HeroSection />
         <PlansSection />
         <ExperienceSection />

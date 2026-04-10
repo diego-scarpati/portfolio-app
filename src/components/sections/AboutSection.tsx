@@ -16,7 +16,7 @@ const FACTS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-24 md:py-32" style={{ background: "var(--bg-primary)" }}>
+    <section id="about" className="py-24 md:py-32 flex flex-col justify-center" style={{ background: 'var(--bg-primary)', minHeight: '100dvh' }}>
       <div className="max-w-5xl mx-auto px-6">
 
         <div className="mb-16">

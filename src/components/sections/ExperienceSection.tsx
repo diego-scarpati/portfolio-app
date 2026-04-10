@@ -30,8 +30,8 @@ export function ExperienceSection() {
     <section
       ref={sectionRef}
       id="experience"
-      className="reveal-on-scroll py-24 md:py-32"
-      style={{ background: 'var(--bg-primary)' }}
+      className="reveal-on-scroll py-24 md:py-32 flex flex-col justify-center"
+      style={{ background: 'var(--bg-primary)', minHeight: '100dvh' }}
     >
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem' }}>
 

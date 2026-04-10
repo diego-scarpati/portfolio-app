@@ -33,6 +33,10 @@
   --tag-border: #cfd9e8;
   --glass-bg: rgba(255, 255, 255, 0.65);
   --glass-border: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-text: #1d2634;
+  --nav-muted: #5378a4;
 }
 
 /* ─── Dark theme ─── */
@@ -53,6 +57,10 @@
   --tag-border: #2d4060;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.09);
+  --nav-bg: rgba(15, 24, 37, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.09);
+  --nav-text: #eaeef4;
+  --nav-muted: #4d6a8a;
 }
 
 * {
