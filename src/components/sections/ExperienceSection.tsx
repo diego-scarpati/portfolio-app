@@ -1,89 +1,155 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import { workItems } from '@/data/work'
 
 export function ExperienceSection() {
-  return (
-    <section id="experience" className="py-24 md:py-32" style={{ background: "var(--bg-primary)" }}>
-      <div className="max-w-5xl mx-auto px-6">
+  const sectionRef = useRef<HTMLElement>(null)
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
 
-        <div className="mb-16">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const section = sectionRef.current
+    if (section) observer.observe(section)
+    itemRefs.current.forEach((item) => { if (item) observer.observe(item) })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section
+      ref={sectionRef}
+      id="experience"
+      className="reveal-on-scroll py-24 md:py-32"
+      style={{ background: 'var(--bg-primary)' }}
+    >
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem' }}>
+
+        <div style={{ marginBottom: '3rem' }}>
           <p className="section-label">03 / Experience</p>
-          <h2 style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--text-primary)" }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.01em',
+            }}
+          >
             Where I&apos;ve worked
           </h2>
         </div>
 
-        <ol className="space-y-0">
+        <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {workItems.map((item, i) => (
-            <li
-              key={`${item.employer}-${item.start}`}
-              className="group relative"
-              style={{ borderTop: "1px solid var(--border)" }}
-            >
-              <div className="py-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:gap-12 items-start">
+            <li key={`${item.employer}-${item.start}`}>
+              <div
+                ref={(el) => { itemRefs.current[i] = el }}
+                className="reveal-card"
+                style={{
+                  transitionDelay: `${i * 100}ms`,
+                  borderTop: '1px solid var(--border)',
+                  padding: '1.75rem 0 1.75rem 1.25rem',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr auto',
+                  gap: '0.25rem 2rem',
+                  alignItems: 'start',
+                  position: 'relative',
+                }}
+                onMouseEnter={e => {
+                  const accent = e.currentTarget.querySelector<HTMLDivElement>('[data-accent-bar]')
+                  if (accent) accent.style.opacity = '1'
+                }}
+                onMouseLeave={e => {
+                  const accent = e.currentTarget.querySelector<HTMLDivElement>('[data-accent-bar]')
+                  if (accent) accent.style.opacity = '0'
+                }}
+              >
+                {/* Left accent bar — reveals on hover */}
+                <div
+                  data-accent-bar
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: '1.75rem',
+                    bottom: '1.75rem',
+                    width: 2,
+                    borderRadius: 1,
+                    background: 'var(--accent)',
+                    opacity: 0,
+                    transition: 'opacity 0.25s',
+                  }}
+                />
 
                 <div>
-                  {/* Number + title row */}
-                  <div className="flex items-baseline gap-4 mb-2">
-                    <span
-                      style={{
-                        fontFamily: "var(--font-syne)",
-                        fontWeight: 800,
-                        fontSize: "0.7rem",
-                        letterSpacing: "0.15em",
-                        color: "var(--text-muted)",
-                        opacity: 0.5,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-colors duration-200 hover:text-[var(--accent)]"
-                      style={{
-                        fontFamily: "var(--font-syne)",
-                        fontWeight: 700,
-                        fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
-                        color: "var(--text-primary)",
-                        letterSpacing: "-0.01em",
-                      }}
-                    >
-                      {item.employer} ↗
-                    </a>
-                  </div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 600,
+                      fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)',
+                      color: 'var(--text-primary)',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s',
+                      display: 'inline-block',
+                      marginBottom: '0.2rem',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-2)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+                  >
+                    {item.employer} ↗
+                  </a>
 
                   <p
-                    className="mb-4"
                     style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      color: "var(--accent)",
-                      fontWeight: 500,
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.75rem',
+                      letterSpacing: '0.03em',
+                      color: 'var(--accent-2)',
+                      marginBottom: '0.5rem',
                     }}
                   >
                     {item.title}
                   </p>
 
-                  <p style={{ fontFamily: "var(--font-body)", color: "var(--text-secondary)", fontSize: "0.95rem", lineHeight: 1.7 }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.85rem',
+                      color: 'var(--text-secondary)',
+                      lineHeight: 1.65,
+                      maxWidth: 520,
+                    }}
+                  >
                     {item.brief}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mt-5">
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', marginTop: '0.75rem' }}>
                     {item.technologies.map((t) => (
                       <span
                         key={t}
                         style={{
-                          background: "var(--tag-bg)",
-                          color: "var(--tag-text)",
-                          border: "1px solid var(--tag-border)",
-                          fontFamily: "var(--font-body)",
-                          fontSize: "0.65rem",
-                          letterSpacing: "0.07em",
+                          fontFamily: 'var(--font-body)',
+                          fontSize: '0.56rem',
+                          letterSpacing: '0.07em',
+                          textTransform: 'uppercase',
+                          color: 'var(--text-muted)',
+                          border: '1px solid var(--border)',
+                          padding: '0.15rem 0.5rem',
+                          borderRadius: 999,
                         }}
-                        className="px-2.5 py-1 rounded-sm uppercase"
                       >
                         {t}
                       </span>
@@ -91,24 +157,25 @@ export function ExperienceSection() {
                   </div>
                 </div>
 
-                <div className="md:text-right shrink-0">
-                  <span
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.7rem",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {item.start} — {item.end}
-                  </span>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-muted)',
+                    textAlign: 'right',
+                    whiteSpace: 'nowrap',
+                    paddingTop: '0.2rem',
+                  }}
+                >
+                  {item.start} — {item.end}
                 </div>
               </div>
             </li>
           ))}
           {/* Bottom border */}
-          <li style={{ borderTop: "1px solid var(--border)" }} />
+          <li style={{ borderTop: '1px solid var(--border)' }} aria-hidden />
         </ol>
       </div>
     </section>
