@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
-import { Syne, DM_Sans } from 'next/font/google'
+import { Playfair_Display, Inter } from 'next/font/google'
+import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import './globals.css'
 
-// Display font — bold, geometric, distinctive
-const syne = Syne({
+const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '700', '800'],
-  variable: '--font-syne',
+  weight: ['400', '600', '700'],
+  variable: '--font-display',
   display: 'swap',
 })
 
-// Body font — clean, modern, readable
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
   variable: '--font-body',
@@ -160,7 +159,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
       </head>
-      <body className={`${syne.variable} ${dmSans.variable}`}>{children}</body>
+      <body className={`${playfairDisplay.variable} ${inter.variable}`}>
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   )
 }

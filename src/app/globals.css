@@ -25,11 +25,14 @@
   --text-secondary: #354d6f;
   --text-muted: #5378a4;
   --accent: #243042;
+  --accent-2: #2563EB;
   --accent-hover: #354d6f;
   --accent-text: #eaeef4;
   --tag-bg: #eaeef4;
   --tag-text: #405f89;
   --tag-border: #cfd9e8;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.08);
 }
 
 /* ─── Dark theme ─── */
@@ -41,12 +44,15 @@
   --text-primary: #eaeef4;
   --text-secondary: #8faac8;
   --text-muted: #4d6a8a;
-  --accent: #4a72a8;
-  --accent-hover: #5a84bc;
-  --accent-text: #eaeef4;
+  --accent: #3B82F6;
+  --accent-2: #60A5FA;
+  --accent-hover: #2563EB;
+  --accent-text: #ffffff;
   --tag-bg: #1a2638;
   --tag-text: #6a95c8;
   --tag-border: #2d4060;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.09);
 }
 
 * {
@@ -68,23 +74,71 @@ body {
   position: relative;
 }
 
-/* Grain texture overlay — adds depth and premium feel */
+/* Grain texture overlay */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.04;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
 }
 
-/* Typography — Syne for all headings */
+/* Typography — Playfair Display for all headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-syne), system-ui, sans-serif;
+  font-family: var(--font-display), Georgia, serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Scroll reveal classes (used by client components) ─── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Keyframe animations ─── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 0.8; }
+  }
+
+  @keyframes ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
+  }
+
+  .animate-hero-in {
+    animation: heroIn var(--hero-duration, 0.6s) var(--hero-delay, 0s) ease both;
+  }
+
+  .animate-scroll-pulse {
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
@@ -117,6 +171,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .font-display {
-    font-family: var(--font-syne), system-ui, sans-serif;
+    font-family: var(--font-display), Georgia, serif;
   }
 }
