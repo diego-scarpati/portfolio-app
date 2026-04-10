@@ -1,146 +1,217 @@
-const TECH = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Supabase",
-  "Node.js",
-  "Solidity",
-  "AWS",
-  "Python",
-];
+'use client'
+
+import { useEffect, useRef } from 'react'
+
+const TECH = ['Next.js', 'React', 'TypeScript', 'Supabase', 'Node.js', 'Solidity', 'AWS', 'Python']
 
 export function HeroSection() {
+  const blob1 = useRef<HTMLDivElement>(null)
+  const blob2 = useRef<HTMLDivElement>(null)
+  const blob3 = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      if (blob1.current) blob1.current.style.transform = `translateY(${y * 0.15}px)`
+      if (blob2.current) blob2.current.style.transform = `translateY(${y * 0.08}px)`
+      if (blob3.current) blob3.current.style.transform = `translateY(${y * 0.12}px)`
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+    <section
+      style={{
+        height: '100dvh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '5rem 1.5rem 2.5rem',
+      }}
+    >
+      {/* Parallax blobs — 3 layers */}
+      <div ref={blob1} aria-hidden style={{ position: 'absolute', width: 520, height: 520, borderRadius: '50%', filter: 'blur(70px)', background: 'rgba(59,130,246,0.18)', top: -120, right: -80, pointerEvents: 'none', willChange: 'transform' }} />
+      <div ref={blob2} aria-hidden style={{ position: 'absolute', width: 320, height: 320, borderRadius: '50%', filter: 'blur(70px)', background: 'rgba(29,78,216,0.15)', bottom: 60, left: -60, pointerEvents: 'none', willChange: 'transform' }} />
+      <div ref={blob3} aria-hidden style={{ position: 'absolute', width: 200, height: 200, borderRadius: '50%', filter: 'blur(70px)', background: 'rgba(96,165,250,0.12)', top: '40%', left: '30%', pointerEvents: 'none', willChange: 'transform' }} />
 
-      {/* Deep background gradient */}
+      {/* Glass band */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          background: [
-            "radial-gradient(ellipse 90% 70% at -5% 10%, rgba(77,124,191,0.12) 0%, transparent 60%)",
-            "radial-gradient(ellipse 60% 50% at 110% 90%, rgba(77,124,191,0.08) 0%, transparent 55%)",
-          ].join(", "),
-        }}
-      />
-
-      {/* Large watermark number */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 select-none"
-        style={{
-          fontFamily: "var(--font-syne)",
-          fontWeight: 800,
-          fontSize: "clamp(180px, 28vw, 380px)",
-          lineHeight: 1,
-          color: "var(--text-primary)",
-          opacity: 0.025,
-          letterSpacing: "-0.05em",
+          maxWidth: 860,
+          margin: '0 auto',
+          width: '100%',
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          border: '1px solid var(--glass-border)',
+          borderRadius: 28,
+          padding: '2.5rem 3rem',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
-        DS
-      </span>
-
-      <div className="max-w-5xl mx-auto px-6 w-full py-28 md:py-36">
         {/* Availability pill */}
-        <div className="flex items-center gap-2.5 mb-12">
+        <div
+          className="animate-hero-in"
+          style={{
+            '--hero-duration': '0.6s',
+            '--hero-delay': '0.1s',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            marginBottom: '1.25rem',
+          } as React.CSSProperties}
+        >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span
-            className="text-[11px] tracking-[0.22em] uppercase"
-            style={{ color: "var(--text-muted)", fontFamily: "var(--font-body)" }}
-          >
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
             Available for freelance · Sydney, AU
           </span>
         </div>
 
-        {/* Main heading — full Syne weight */}
-        <div className="mb-8">
-          <h1
-            className="leading-none tracking-tight"
-            style={{
-              fontFamily: "var(--font-syne)",
-              fontWeight: 800,
-              fontSize: "clamp(3.5rem, 9vw, 8rem)",
-              color: "var(--text-primary)",
-            }}
-          >
-            Diego<br />
-            <span style={{ color: "var(--accent)" }}>Scarpati</span>
-          </h1>
-        </div>
-
-        {/* Role line */}
-        <p
-          className="mb-6 tracking-widest uppercase"
+        {/* Name */}
+        <h1
+          className="animate-hero-in"
           style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: 500,
-            fontSize: "clamp(0.7rem, 1.5vw, 0.85rem)",
-            color: "var(--text-muted)",
-            letterSpacing: "0.22em",
-          }}
+            '--hero-duration': '0.7s',
+            '--hero-delay': '0.2s',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
+            lineHeight: 1.0,
+            letterSpacing: '-0.02em',
+            color: 'var(--text-primary)',
+            marginBottom: '0.15em',
+          } as React.CSSProperties}
+        >
+          Diego<br />
+          <span style={{ color: 'var(--accent-2)' }}>Scarpati</span>
+        </h1>
+
+        {/* Role */}
+        <p
+          className="animate-hero-in"
+          style={{
+            '--hero-duration': '0.6s',
+            '--hero-delay': '0.35s',
+            fontFamily: 'var(--font-body)',
+            fontSize: 'clamp(0.62rem, 1.1vw, 0.75rem)',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'var(--text-muted)',
+            marginBottom: '1rem',
+          } as React.CSSProperties}
         >
           Senior Fullstack Developer
         </p>
 
         {/* Description */}
         <p
-          className="mb-12 max-w-md leading-relaxed"
+          className="animate-hero-in"
           style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "1.05rem",
-            color: "var(--text-secondary)",
-          }}
+            '--hero-duration': '0.6s',
+            '--hero-delay': '0.45s',
+            fontFamily: 'var(--font-body)',
+            fontSize: '0.95rem',
+            lineHeight: 1.7,
+            color: 'var(--text-secondary)',
+            maxWidth: 420,
+            marginBottom: '1.75rem',
+          } as React.CSSProperties}
         >
-          Building production-grade web apps, landing pages & Web3 products for Australian businesses.
+          Building production-grade web apps, landing pages &amp; Web3 products for Australian businesses.
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap gap-4 mb-16">
+        <div
+          className="animate-hero-in"
+          style={{
+            '--hero-duration': '0.6s',
+            '--hero-delay': '0.55s',
+            display: 'flex',
+            gap: '1rem',
+            flexWrap: 'wrap',
+            marginBottom: '1.5rem',
+          } as React.CSSProperties}
+        >
           <a
             href="#plans"
             style={{
-              background: "var(--accent)",
-              color: "var(--accent-text)",
-              fontFamily: "var(--font-body)",
+              display: 'inline-flex',
+              alignItems: 'center',
+              background: 'var(--accent)',
+              color: 'var(--accent-text)',
+              fontFamily: 'var(--font-body)',
               fontWeight: 600,
+              fontSize: '0.65rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              padding: '0.75rem 1.5rem',
+              borderRadius: 999,
+              textDecoration: 'none',
+              transition: 'background 0.2s, transform 0.2s',
             }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.18em] uppercase rounded-sm hover:opacity-90 transition-opacity duration-200"
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-hover)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(0)' }}
           >
             View Plans ↓
           </a>
           <a
             href="#work"
             style={{
-              border: "1px solid var(--border)",
-              color: "var(--text-secondary)",
-              fontFamily: "var(--font-body)",
-              fontWeight: 500,
+              display: 'inline-flex',
+              alignItems: 'center',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-secondary)',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.65rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              padding: '0.75rem 1.5rem',
+              borderRadius: 999,
+              textDecoration: 'none',
+              transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
             }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.18em] uppercase rounded-sm hover:border-[var(--accent)] hover:text-[var(--text-primary)] transition-colors duration-200"
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--glass-border)'; e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.transform = 'translateY(0)' }}
           >
             See My Work ↓
           </a>
         </div>
 
         {/* Tech tags */}
-        <div className="flex flex-wrap gap-2">
+        <div
+          className="animate-hero-in"
+          style={{
+            '--hero-duration': '0.6s',
+            '--hero-delay': '0.65s',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.4rem',
+          } as React.CSSProperties}
+        >
           {TECH.map((t) => (
             <span
               key={t}
               style={{
-                background: "var(--tag-bg)",
-                color: "var(--tag-text)",
-                border: "1px solid var(--tag-border)",
-                fontFamily: "var(--font-body)",
-                fontSize: "0.68rem",
-                letterSpacing: "0.06em",
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.6rem',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                background: 'var(--glass-bg)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text-muted)',
+                padding: '0.22rem 0.65rem',
+                borderRadius: 999,
+                transition: 'border-color 0.2s, color 0.2s',
               }}
-              className="px-3 py-1 rounded-sm uppercase"
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent-2)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--glass-border)'; e.currentTarget.style.color = 'var(--text-muted)' }}
             >
               {t}
             </span>
@@ -148,17 +219,29 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll hint */}
+      {/* Scroll hint — outside glass band */}
       <div
         aria-hidden
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ opacity: 0.3 }}
+        style={{
+          position: 'absolute',
+          bottom: '1.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          opacity: 0.3,
+        }}
       >
         <div
-          className="w-px h-10"
-          style={{ background: "linear-gradient(to bottom, var(--text-muted), transparent)" }}
+          className="animate-scroll-pulse"
+          style={{
+            width: 1,
+            height: 36,
+            background: 'linear-gradient(to bottom, var(--accent-2), transparent)',
+          }}
         />
       </div>
     </section>
-  );
+  )
 }
