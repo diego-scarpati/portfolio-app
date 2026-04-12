@@ -1,70 +1,266 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 36, 48, 66;
-  --background-end-rgb: 36, 48, 66;
-  --bs-50: #f5f7fa;
-  --bs-100: #eaeef4;
-  --bs-200: #cfd9e8;
-  --bs-300: #a5bad4;
-  --bs-400: #7596bb;
-  --bs-500: #5378a4;
-  --bs-600: #405f89;
-  --bs-700: #354d6f;
-  --bs-800: #2f425d;
-  --bs-900: #243042;
-  --bs-950: #1d2634;
+@theme {
+  --color-big-stone-50: #f5f7fa;
+  --color-big-stone-100: #eaeef4;
+  --color-big-stone-200: #cfd9e8;
+  --color-big-stone-300: #a5bad4;
+  --color-big-stone-400: #7596bb;
+  --color-big-stone-500: #5378a4;
+  --color-big-stone-600: #405f89;
+  --color-big-stone-700: #354d6f;
+  --color-big-stone-800: #2f425d;
+  --color-big-stone-900: #243042;
+  --color-big-stone-950: #1d2634;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 36, 48, 66;
-    --background-end-rgb: 36, 48, 66;
+/* ─── Light theme (default) ─── */
+:root {
+  --bg-primary: #eaeef4;
+  --bg-secondary: #f5f7fa;
+  --bg-card: #ffffff;
+  --border: #cfd9e8;
+  --text-primary: #1d2634;
+  --text-secondary: #354d6f;
+  --text-muted: #5378a4;
+  --accent: #243042;
+  --accent-2: #2563eb;
+  --accent-hover: #354d6f;
+  --accent-text: #eaeef4;
+  --tag-bg: #eaeef4;
+  --tag-text: #405f89;
+  --tag-border: #cfd9e8;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-text: #1d2634;
+  --nav-muted: #5378a4;
+}
+
+/* ─── Dark theme — explicit user choice ─── */
+[data-theme="dark"] {
+  --bg-primary: #151e2d;
+  --bg-secondary: #1d2a3e;
+  --bg-card: #243348;
+  --border: #2d4060;
+  --text-primary: #eaeef4;
+  --text-secondary: #8faac8;
+  --text-muted: #4d6a8a;
+  --accent: #3b82f6;
+  --accent-2: #60a5fa;
+  --accent-hover: #2563eb;
+  --accent-text: #ffffff;
+  --tag-bg: #1a2638;
+  --tag-text: #6a95c8;
+  --tag-border: #2d4060;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --nav-bg: rgba(15, 24, 37, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.09);
+  --nav-text: #eaeef4;
+  --nav-muted: #4d6a8a;
+}
+
+/* ─── Dark theme — system preference fallback (no JS required, no flash) ─── */
+/* Applies when system is dark AND the user hasn't explicitly chosen light.   */
+/* This fires before any JavaScript runs, eliminating the hero-section flash. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #151e2d;
+    --bg-secondary: #1d2a3e;
+    --bg-card: #243348;
+    --border: #2d4060;
+    --text-primary: #eaeef4;
+    --text-secondary: #8faac8;
+    --text-muted: #4d6a8a;
+    --accent: #3b82f6;
+    --accent-2: #60a5fa;
+    --accent-hover: #2563eb;
+    --accent-text: #ffffff;
+    --tag-bg: #1a2638;
+    --tag-text: #6a95c8;
+    --tag-border: #2d4060;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --nav-bg: rgba(15, 24, 37, 0.75);
+    --nav-border: rgba(255, 255, 255, 0.09);
+    --nav-text: #eaeef4;
+    --nav-muted: #4d6a8a;
   }
-} */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
 
 body {
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
   position: relative;
 }
 
+/* Grain texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+section {
+  min-height: 100dvh;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+/* Form elements — inherit body font (browsers override by default) */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+/* Typography — Playfair Display for all headings */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-p {
-  color: var(--bs-200);
-  /* letter-spacing: -1px; */
-  /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+h6 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-h1 {
-  font-size: 3rem;
+/* ─── Scroll reveal classes (used by client components) ─── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
-h2 {
-  font-size: 2.25rem;
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-h3 {
-  font-size: 1rem;
-  line-height: 1.5rem;
+
+.reveal-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
-p {
-  /* font-size: 0.875rem;
-  line-height: 1.25rem; */
-  font-size: 0.75rem;
-  line-height: 1rem;
+
+.reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Keyframe animations ─── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes heroIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scrollPulse {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-hero-in {
+    animation: heroIn var(--hero-duration, 0.6s) var(--hero-delay, 0s) ease both;
+  }
+
+  .animate-scroll-pulse {
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+}
+
+/* ─── ThemeToggle icon visibility — CSS-driven, zero re-render ─── */
+.theme-icon-sun {
+  display: none;
+}
+.theme-icon-moon {
+  display: block;
+}
+[data-theme="dark"] .theme-icon-sun {
+  display: block;
+}
+[data-theme="dark"] .theme-icon-moon {
+  display: none;
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background-color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
