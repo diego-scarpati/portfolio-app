@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
+import Script from 'next/script'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import './globals.css'
 
@@ -52,6 +53,11 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -85,17 +91,17 @@ const serviceSchema = {
           name: 'Web Application',
           description: 'Full-stack web application with auth, database, and APIs.',
         },
-        price: '3000',
+        price: '3500',
         priceCurrency: 'AUD',
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Web3 / Smart Contract',
-          description: 'EVM-compatible Solidity smart contracts with DApp frontend.',
+          name: 'Web3 Projects',
+          description: 'Smart contract integration with full DApp frontend.',
         },
-        price: '2000',
+        price: '3000',
         priceCurrency: 'AUD',
       },
       {
@@ -143,23 +149,31 @@ const personSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* No-flash theme script — must run synchronously before paint */}
-        <script
+      <body className={`${playfairDisplay.variable} ${inter.variable}`}>
+        {/*
+          beforeInteractive injects into the server-rendered <head> at the framework level,
+          completely outside React's virtual DOM — no head cache interference, no hydration conflict.
+          Priority: 1. localStorage  2. system prefers-color-scheme
+        */}
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}else{var d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=(t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){}})();`,
           }}
         />
-        <script
+        <Script
+          id="person-schema"
+          strategy="beforeInteractive"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        <script
+        <Script
+          id="service-schema"
+          strategy="beforeInteractive"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
-      </head>
-      <body className={`${playfairDisplay.variable} ${inter.variable}`}>
         <ScrollProgress />
         {children}
       </body>

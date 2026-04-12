@@ -38,7 +38,7 @@ export const servicePlans: ServicePlan[] = [
   {
     id: 'web-app',
     name: 'Web App',
-    startingPrice: 3000,
+    startingPrice: 3500,
     currency: 'AUD',
     timeline: '4–8 weeks',
     description: 'Full-stack web application with auth, database, and all the infrastructure you need.',
@@ -53,17 +53,17 @@ export const servicePlans: ServicePlan[] = [
   },
   {
     id: 'web3',
-    name: 'Web3 / Smart Contract',
-    startingPrice: 2000,
+    name: 'Web3 Projects',
+    startingPrice: 3000,
     currency: 'AUD',
     timeline: '3–6 weeks',
-    description: 'EVM-compatible smart contracts with a full DApp frontend.',
+    description: 'Integrate smart contracts into full DApp frontends — from wallet connection to on-chain interactions.',
     features: [
-      'Solidity contract development',
-      'Hardhat/Foundry testing',
+      'Smart contract integration (EVM)',
+      'Wallet connection (MetaMask, WalletConnect)',
       'React/Next.js DApp UI',
-      'Wallet integration (MetaMask, WalletConnect)',
-      'Mainnet or L2 deployment',
+      'On-chain data reading & transactions',
+      'Deployed DApp on Vercel',
     ],
   },
   {

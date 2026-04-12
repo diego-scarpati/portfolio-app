@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@source "../../";
 
 @theme {
   --color-big-stone-50: #f5f7fa;
@@ -25,7 +24,7 @@
   --text-secondary: #354d6f;
   --text-muted: #5378a4;
   --accent: #243042;
-  --accent-2: #2563EB;
+  --accent-2: #2563eb;
   --accent-hover: #354d6f;
   --accent-text: #eaeef4;
   --tag-bg: #eaeef4;
@@ -39,7 +38,7 @@
   --nav-muted: #5378a4;
 }
 
-/* ─── Dark theme ─── */
+/* ─── Dark theme — explicit user choice ─── */
 [data-theme="dark"] {
   --bg-primary: #151e2d;
   --bg-secondary: #1d2a3e;
@@ -48,9 +47,9 @@
   --text-primary: #eaeef4;
   --text-secondary: #8faac8;
   --text-muted: #4d6a8a;
-  --accent: #3B82F6;
-  --accent-2: #60A5FA;
-  --accent-hover: #2563EB;
+  --accent: #3b82f6;
+  --accent-2: #60a5fa;
+  --accent-hover: #2563eb;
   --accent-text: #ffffff;
   --tag-bg: #1a2638;
   --tag-text: #6a95c8;
@@ -63,6 +62,34 @@
   --nav-muted: #4d6a8a;
 }
 
+/* ─── Dark theme — system preference fallback (no JS required, no flash) ─── */
+/* Applies when system is dark AND the user hasn't explicitly chosen light.   */
+/* This fires before any JavaScript runs, eliminating the hero-section flash. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #151e2d;
+    --bg-secondary: #1d2a3e;
+    --bg-card: #243348;
+    --border: #2d4060;
+    --text-primary: #eaeef4;
+    --text-secondary: #8faac8;
+    --text-muted: #4d6a8a;
+    --accent: #3b82f6;
+    --accent-2: #60a5fa;
+    --accent-hover: #2563eb;
+    --accent-text: #ffffff;
+    --tag-bg: #1a2638;
+    --tag-text: #6a95c8;
+    --tag-border: #2d4060;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --nav-bg: rgba(15, 24, 37, 0.75);
+    --nav-border: rgba(255, 255, 255, 0.09);
+    --nav-text: #eaeef4;
+    --nav-muted: #4d6a8a;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -73,7 +100,9 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 body {
@@ -84,7 +113,7 @@ body {
 
 /* Grain texture overlay */
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -94,8 +123,27 @@ body::after {
   background-size: 300px 300px;
 }
 
+section {
+  min-height: 100dvh;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+/* Form elements — inherit body font (browsers override by default) */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
 /* Typography — Playfair Display for all headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -105,7 +153,9 @@ h1, h2, h3, h4, h5, h6 {
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .reveal-on-scroll.is-visible {
@@ -116,7 +166,9 @@ h1, h2, h3, h4, h5, h6 {
 .reveal-card {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .reveal-card.is-visible {
@@ -127,13 +179,24 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Keyframe animations ─── */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes heroIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50%       { opacity: 0.8; }
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
 
   .animate-hero-in {
@@ -143,6 +206,20 @@ h1, h2, h3, h4, h5, h6 {
   .animate-scroll-pulse {
     animation: scrollPulse 2s ease-in-out infinite;
   }
+}
+
+/* ─── ThemeToggle icon visibility — CSS-driven, zero re-render ─── */
+.theme-icon-sun {
+  display: none;
+}
+.theme-icon-moon {
+  display: block;
+}
+[data-theme="dark"] .theme-icon-sun {
+  display: block;
+}
+[data-theme="dark"] .theme-icon-moon {
+  display: none;
 }
 
 @layer utilities {
@@ -167,7 +244,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .section-label::before {
-    content: '';
+    content: "";
     display: block;
     width: 2rem;
     height: 1px;
@@ -177,5 +254,13 @@ h1, h2, h3, h4, h5, h6 {
 
   .font-display {
     font-family: var(--font-display), Georgia, serif;
+  }
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

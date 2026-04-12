@@ -1,155 +1,319 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useRef, type FormEvent } from 'react'
-import { submitContactForm, type ContactFormData } from '@/app/actions/contact'
+import { useState, useEffect, useRef, type FormEvent } from "react";
+import { submitContactForm, type ContactFormData } from "@/app/actions/contact";
+import { CustomSelect } from "@/components/ui/CustomSelect";
 
 const SERVICES = [
-  'Landing Page',
-  'Web App',
-  'Web3 / Smart Contract',
-  'MVP Build',
-  'Retainer',
-  'Other',
-]
+  "Landing Page",
+  "Web App",
+  "Web3 Projects",
+  "MVP Build",
+  "Retainer",
+  "Other",
+];
 
 const BUDGETS = [
-  'Under $1,000',
-  '$1,000–$3,000',
-  '$3,000–$5,000',
-  '$5,000–$10,000',
-  '$10,000+',
-  'Not sure',
-]
+  "Under $1,000",
+  "$1,000–$3,000",
+  "$3,000–$5,000",
+  "$5,000–$10,000",
+  "$10,000+",
+  "Not sure",
+];
 
-type Status = 'idle' | 'submitting' | 'success' | 'error'
+type Status = "idle" | "submitting" | "success" | "error";
 
-const inputClass =
-  'w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-200 bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] rounded-xl'
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontFamily: "var(--font-body)",
+  fontSize: "0.6rem",
+  letterSpacing: "0.18em",
+  textTransform: "uppercase",
+  color: "var(--text-muted)",
+  marginBottom: "0.5rem",
+};
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  fontFamily: "var(--font-body)",
+  fontSize: "0.9rem",
+  color: "var(--text-primary)",
+  background: "var(--bg-primary)",
+  border: "1px solid var(--border)",
+  borderRadius: 16,
+  padding: "0.75rem 1rem",
+  outline: "none",
+  transition: "border-color 0.2s",
+};
 
 export function ContactSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [status, setStatus] = useState<Status>('idle')
-  const [honeypot, setHoneypot] = useState('')
-  const [errorMessage, setErrorMessage] = useState<string | undefined>()
+  const sectionRef = useRef<HTMLElement>(null);
+  const [status, setStatus] = useState<Status>("idle");
+  const [honeypot, setHoneypot] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [service, setService] = useState("");
+  const [budget, setBudget] = useState("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('is-visible')
-        })
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
       },
-      { threshold: 0.1 },
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // Page-refresh case: key was set before reload
+    const stored = sessionStorage.getItem("contact-preselect-service");
+    if (stored) {
+      setService(stored);
+      sessionStorage.removeItem("contact-preselect-service");
+    }
+
+    // Same-page click case: custom event fired synchronously from PlansSection
+    const handler = (e: Event) => {
+      setService((e as CustomEvent<string>).detail);
+    };
+    window.addEventListener("contact-preselect", handler);
+    return () => window.removeEventListener("contact-preselect", handler);
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('submitting')
-    setErrorMessage(undefined)
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMessage(undefined);
 
-    const form = new FormData(e.currentTarget)
+    const form = new FormData(e.currentTarget);
     const data: ContactFormData = {
-      name: String(form.get('name') ?? ''),
-      email: String(form.get('email') ?? ''),
-      company: (form.get('company') as string) || undefined,
-      service: String(form.get('service') ?? ''),
-      budget: String(form.get('budget') ?? ''),
-      message: String(form.get('message') ?? ''),
+      name: String(form.get("name") ?? ""),
+      email: String(form.get("email") ?? ""),
+      company: (form.get("company") as string) || undefined,
+      service: String(form.get("service") ?? ""),
+      budget: String(form.get("budget") ?? ""),
+      message: String(form.get("message") ?? ""),
       honeypot,
-    }
+    };
 
-    const result = await submitContactForm(data)
+    const result = await submitContactForm(data);
     if (result.success) {
-      setStatus('success')
+      setStatus("success");
     } else {
-      setStatus('error')
-      setErrorMessage(result.error)
+      setStatus("error");
+      setErrorMessage(result.error);
     }
   }
+
+  const focusBorder = (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    e.currentTarget.style.borderColor = "var(--accent)";
+  };
+  const blurBorder = (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    e.currentTarget.style.borderColor = "var(--border)";
+  };
 
   return (
     <section
       ref={sectionRef}
       id="contact"
       className="reveal-on-scroll py-32 md:py-40 flex flex-col justify-center"
-      style={{ background: 'var(--bg-secondary)', minHeight: '100dvh' }}
+      style={{ background: "var(--bg-secondary)", minHeight: "100dvh" }}
     >
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
-        <div className="mb-16">
-          <p className="section-label">06 / Send a Brief</p>
+      <div
+        style={{
+          maxWidth: 860,
+          margin: "0 auto",
+          padding: "0 1.5rem",
+          width: "100%",
+        }}
+      >
+        <div style={{ marginBottom: "3rem" }}>
+          <p className="section-label">06 / Contact</p>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
-              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
-              color: 'var(--text-primary)',
-              letterSpacing: '-0.02em',
+              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+              color: "var(--text-primary)",
+              letterSpacing: "-0.02em",
+              marginBottom: "0.75rem",
             }}
-            className="mb-3"
           >
             Got a project in mind?
           </h2>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--text-secondary)", fontSize: "1.05rem" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              color: "var(--text-secondary)",
+              fontSize: "0.95rem",
+              lineHeight: 1.7,
+            }}
+          >
             Tell me about it. I respond within 24 hours.
           </p>
         </div>
 
+        {/* Glass form card */}
         <div
           style={{
-            background: 'var(--glass-bg)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid var(--glass-border)',
-            borderRadius: 20,
+            background: "var(--glass-bg)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid var(--glass-border)",
+            borderRadius: 24,
+            padding: "2.5rem",
           }}
-          className="p-8 md:p-10"
         >
-          {status === 'success' ? (
-            <div className="py-16 text-center">
-              <p className="text-2xl font-bold text-[var(--text-primary)] mb-2">
-                Thanks!
-              </p>
-              <p className="text-[var(--text-secondary)]">
-                I&apos;ll be in touch within 24 hours.
-              </p>
+          {status === "success" ? (
+            <div
+              style={{
+                minHeight: 480,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                gap: "1.5rem",
+              }}
+            >
+              <div
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: "50%",
+                  background: "rgba(59,130,246,0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  aria-hidden="true"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--accent-2)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.75rem",
+                    fontWeight: 700,
+                    color: "var(--text-primary)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Thanks!
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    color: "var(--text-secondary)",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  I&apos;ll be in touch within 24 hours.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus("idle");
+                  setService("");
+                  setBudget("");
+                  setErrorMessage(undefined);
+                }}
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "0.6rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                  background: "transparent",
+                  border: "1px solid var(--glass-border)",
+                  borderRadius: 999,
+                  padding: "0.65rem 1.5rem",
+                  cursor: "pointer",
+                  transition: "color 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--text-primary)";
+                  e.currentTarget.style.borderColor = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--text-muted)";
+                  e.currentTarget.style.borderColor = "var(--glass-border)";
+                }}
+              >
+                Send another brief
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Honeypot — hidden from real users, bots fill this */}
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.25rem",
+              }}
+            >
+              {/* Honeypot */}
               <input
                 type="text"
                 name="website"
                 aria-hidden="true"
                 tabIndex={-1}
                 autoComplete="off"
-                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  opacity: 0,
+                  height: 0,
+                  width: 0,
+                }}
                 value={honeypot}
                 onChange={(e) => setHoneypot(e.target.value)}
               />
+
+              {/* Name + Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                  >
+                  <label htmlFor="name" style={labelStyle}>
                     Name *
                   </label>
                   <input
                     id="name"
                     name="name"
                     required
-                    className={inputClass}
                     placeholder="Your name"
+                    style={inputStyle}
+                    onFocus={focusBorder}
+                    onBlur={blurBorder}
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                  >
+                  <label htmlFor="email" style={labelStyle}>
                     Email *
                   </label>
                   <input
@@ -157,83 +321,64 @@ export function ContactSection() {
                     name="email"
                     type="email"
                     required
-                    className={inputClass}
                     placeholder="you@company.com"
+                    style={inputStyle}
+                    onFocus={focusBorder}
+                    onBlur={blurBorder}
                   />
                 </div>
               </div>
 
+              {/* Company */}
               <div>
-                <label
-                  htmlFor="company"
-                  className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                >
+                <label htmlFor="company" style={labelStyle}>
                   Company
                 </label>
                 <input
                   id="company"
                   name="company"
-                  className={inputClass}
                   placeholder="Optional"
+                  style={inputStyle}
+                  onFocus={focusBorder}
+                  onBlur={blurBorder}
                 />
               </div>
 
+              {/* Service + Budget */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label
-                    htmlFor="service"
-                    className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                  >
-                    Service
+                  <label htmlFor="service" style={labelStyle}>
+                    Service *
                   </label>
-                  <select
+                  <CustomSelect
                     id="service"
                     name="service"
                     required
-                    defaultValue=""
-                    className={inputClass}
-                  >
-                    <option value="" disabled>
-                      Select a service
-                    </option>
-                    {SERVICES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="Select a service"
+                    options={SERVICES}
+                    value={service}
+                    onChange={setService}
+                  />
                 </div>
                 <div>
-                  <label
-                    htmlFor="budget"
-                    className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                  >
-                    Budget
+                  <label htmlFor="budget" style={labelStyle}>
+                    Budget *
                   </label>
-                  <select
+                  <CustomSelect
                     id="budget"
                     name="budget"
                     required
-                    defaultValue=""
-                    className={inputClass}
-                  >
-                    <option value="" disabled>
-                      Select a budget
-                    </option>
-                    {BUDGETS.map((b) => (
-                      <option key={b} value={b}>
-                        {b}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="Select a budget"
+                    options={BUDGETS}
+                    value={budget}
+                    onChange={setBudget}
+                  />
                 </div>
               </div>
 
+              {/* Message */}
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2"
-                >
+                <label htmlFor="message" style={labelStyle}>
                   Project description *
                 </label>
                 <textarea
@@ -241,69 +386,61 @@ export function ContactSection() {
                   name="message"
                   required
                   rows={6}
-                  className={inputClass}
                   placeholder="Tell me about your project, timeline, and goals..."
+                  style={{ ...inputStyle, resize: "vertical" }}
+                  onFocus={focusBorder}
+                  onBlur={blurBorder}
                 />
               </div>
 
-              {status === 'error' && (
-                <p className="text-sm text-red-400">
-                  {errorMessage ?? 'Something went wrong. Please email me directly.'}
+              {status === "error" && (
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.82rem",
+                    color: "#f87171",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {errorMessage ??
+                    "Something went wrong. Please email me directly."}
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
-                  background: 'var(--accent)',
-                  color: 'var(--accent-text)',
-                  borderRadius: 999,
-                }}
-                className="w-full md:w-auto px-8 py-3.5 text-[11px] uppercase hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {status === 'submitting' ? 'Sending...' : 'Send Brief →'}
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontWeight: 600,
+                    fontSize: "0.62rem",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    background: "var(--accent)",
+                    color: "var(--accent-text)",
+                    borderRadius: 999,
+                    border: "none",
+                    padding: "0.85rem 2rem",
+                    cursor: status === "submitting" ? "not-allowed" : "pointer",
+                    opacity: status === "submitting" ? 0.6 : 1,
+                    transition: "background 0.2s, opacity 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (status !== "submitting")
+                      e.currentTarget.style.background = "var(--accent-hover)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "var(--accent)";
+                  }}
+                >
+                  {status === "submitting" ? "Sending..." : "Send Brief →"}
+                </button>
+              </div>
             </form>
           )}
         </div>
-
-        <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm">
-          <a
-            href="https://www.linkedin.com/in/diego-scarpati/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-          >
-            LinkedIn ↗
-          </a>
-          <a
-            href="https://github.com/diego-scarpati"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-          >
-            GitHub ↗
-          </a>
-          <a
-            href="https://wa.me/61499404825"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-          >
-            WhatsApp ↗
-          </a>
-          <a
-            href="/Diego_Scarpati_Resume.docx"
-            className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-          >
-            Download CV ↓
-          </a>
-        </div>
       </div>
     </section>
-  )
+  );
 }
